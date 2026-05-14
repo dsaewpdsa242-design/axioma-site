@@ -1,0 +1,351 @@
+<!DOCTYPE html><html class="dark" lang="ru"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AXIOMA-M | Специализированные кафедры</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Geist:wght@300;400;500&amp;family=JetBrains+Mono:wght@400;500&amp;family=Playfair+Display:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#f9f5f5",
+                        "tertiary-container": "#dcd9d8",
+                        "surface-bright": "#393939",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-variant": "#353535",
+                        "secondary-container": "#484949",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "on-tertiary": "#313030",
+                        "on-primary-fixed-variant": "#004f54",
+                        "surface-container": "#20201f",
+                        "primary-fixed": "#7df4ff",
+                        "on-secondary-fixed-variant": "#464747",
+                        "primary-fixed-dim": "#00dbe9",
+                        "on-primary-container": "#006970",
+                        "outline-variant": "#3b494b",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-surface-variant": "#b9cacb",
+                        "inverse-surface": "#e5e2e1",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "inverse-primary": "#006970",
+                        "on-background": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed": "#e3e2e2",
+                        "primary-container": "#00f0ff",
+                        "on-primary-fixed": "#002022",
+                        "surface-tint": "#00dbe9",
+                        "on-secondary": "#2f3131",
+                        "error": "#ffb4ab",
+                        "secondary": "#c6c6c6",
+                        "on-primary": "#00363a",
+                        "background": "#050505",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "surface-container-highest": "#353535",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "tertiary-fixed": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "surface-dim": "#131313",
+                        "primary": "#dbfcff",
+                        "outline": "#849495",
+                        "surface": "#131313",
+                        "on-secondary-container": "#b8b8b8",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#605e5e",
+                        "on-error": "#690005",
+                        "surface-container-low": "#1c1b1b",
+                        "neon-cyan": "#00F0FF"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "margin-desktop": "80px",
+                        "unit": "4px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "body-sm": ["Geist"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-lg": ["Geist"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-hero": ["Space Grotesk"],
+                        "serif-elegant": ["Playfair Display", "serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["40px", {"lineHeight": "120%", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "130%", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "150%", "fontWeight": "400"}],
+                        "headline-lg": ["64px", {"lineHeight": "120%", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "160%", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "100%", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                        "display-hero": ["120px", {"lineHeight": "110%", "letterSpacing": "-0.04em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+        .neon-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #00F0FF 50%, transparent 100%);
+            box-shadow: 0 0 8px #00F0FF;
+            opacity: 0.3;
+        }
+        .node-indicator {
+            color: #00F0FF;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+        .serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] .expand-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-[#050505] text-on-surface selection:bg-neon-cyan/30">
+<header class="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-2xl border-b border-outline-variant/10 shadow-[0_0_15px_rgba(0,240,255,0.1)]">
+<nav class="flex justify-between items-center px-margin-desktop py-6 max-w-container-max mx-auto">
+<a href="index.html" class="font-headline-md text-headline-md font-bold tracking-tight text-primary">AXIOMA-M</a>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Исследования</a>
+<a class="font-label-caps text-label-caps text-primary border-b border-primary pb-1" href="departments.html">Кафедры</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="archive.html">Архивы</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="admission.html">Поступления</a>
+</div>
+<div class="flex items-center space-x-6">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">search</span>
+<button class="bg-primary-container text-on-primary-fixed font-label-caps text-label-caps px-6 py-2 tracking-widest hover:shadow-[0_0_15px_#00f0ff] transition-all" onclick="window.location.href='admission.html'">Подключить узел</button>
+</div>
+</nav>
+</header>
+<main class="pt-40 pb-40">
+<section class="max-w-container-max mx-auto px-margin-desktop text-center mb-40">
+<div class="mb-4">
+<span class="font-label-caps text-label-caps text-neon-cyan tracking-[0.5em]">SYSTEM_INIT</span>
+</div>
+<h1 class="font-serif-elegant text-headline-lg text-white mb-8 tracking-tight">Специализированные кафедры</h1>
+<p class="font-body-lg text-on-surface-variant max-w-3xl mx-auto leading-relaxed">
+                Наши специализированные узлы функционируют внутри факультетов, обеспечивая глубокую интеграцию прикладных исследований в образовательный процесс.
+            </p>
+<div class="mt-16 neon-divider w-full"></div>
+</section>
+<section class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<details class="glass-card group overflow-hidden">
+<summary class="p-8 cursor-pointer list-none">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] text-neon-cyan mb-2 block tracking-widest transition-all group-hover:animate-pulse">УЗЕЛ_01</span>
+<h3 class="font-serif-elegant text-headline-md text-white group-hover:text-primary transition-colors">Нейроэтика и цифровое право</h3>
+</div>
+<span class="material-symbols-outlined text-neon-cyan/50 expand-icon transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 space-y-6">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Исследование правовых и этических аспект внедрения нейротехнологий в повседневную жизнь, разработка кодексов взаимодействия ИИ и человека.</p><div class="mt-4 mb-6"><span class="font-label-caps text-[10px] text-primary/60 block mb-1 uppercase tracking-widest">Предметы ЕГЭ</span><p class="font-body-sm text-on-surface">Русский язык, Обществознание, Информатика / Иностранный язык.</p></div>
+<div class="relative aspect-video rounded overflow-hidden border border-outline-variant/20">
+<img alt="Cyberpunk corporate law" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtwUAyNjMtlzNRYKGlqYOjOMNut-DDwc0IClcXx9vxQYUv8LCctqZ22NVEk9mfHMONGTnXW7_xVfRJ7mNwM0xdTvtcGqDB9DZQE_xMqqkkw76ZPbotHO8ZnuYLppTd4OLApcdA_uiYmrf7V5WuctBtd1fbHIvpspx20l7E2G0e7ZA4IkkXljI3pwVLwusRExEV4tueSGEXYaYuTKLia44-cBVCo62BVc6XbodM8jOWK7AT_Dnip0GazP9JmvWkAsL2AiCOnfYXqcg">
+</div>
+</div>
+</details>
+<details class="glass-card group overflow-hidden">
+<summary class="p-8 cursor-pointer">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] text-neon-cyan mb-2 block tracking-widest transition-all group-hover:animate-pulse">УЗЕЛ_02</span>
+<h3 class="font-serif-elegant text-headline-md text-white group-hover:text-primary transition-colors">Когнитивная архитектура систем</h3>
+</div>
+<span class="material-symbols-outlined text-neon-cyan/50 expand-icon transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 space-y-6">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Разработка сложных программно-аппаратных комплексов, имитирующих работу человеческого мозга и когнитивные процессы принятия решений.</p><div class="mt-4 mb-6"><span class="font-label-caps text-[10px] text-primary/60 block mb-1 uppercase tracking-widest">Предметы ЕГЭ</span><p class="font-body-sm text-on-surface">Математика (профиль), Русский язык, Информатика / Физика.</p></div>
+<div class="relative aspect-video rounded overflow-hidden border border-outline-variant/20">
+<img alt="Cognitive software networks" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoPckxiqhN9QPntv0ro-QDIuGOUYpwJXCBrvuxRzQXa2l3YPC1VZ9oSvlnL92YSfGKx0NCRV3h5t_1oeSht5qxKsanxqoEH8y1MlEI2LJemOxRK5yQUAM2rY-wVZ3GqD05sIaNRp2QukAigeHnnvQvMZBtIPcOc22gywvpQY3X6dhvarI1_VxyVxtKwSlZ7fAnSHZDQux2xaGpkITbpg1VFNuEIKFjt6_vqb0z0hE3zapGhdveTWmjc8Q51KA1QM8ZLdKHRP3Lo00">
+</div>
+</div>
+</details>
+<details class="glass-card group overflow-hidden">
+<summary class="p-8 cursor-pointer">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] text-neon-cyan mb-2 block tracking-widest transition-all group-hover:animate-pulse">УЗЕЛ_03</span>
+<h3 class="font-serif-elegant text-headline-md text-white group-hover:text-primary transition-colors">Биоцифровой интерфейс</h3>
+</div>
+<span class="material-symbols-outlined text-neon-cyan/50 expand-icon transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 space-y-6">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Проектирование и создание прямых высокоскоростных каналов связи между биологическими тканями и цифровыми носителями информации.</p><div class="mt-4 mb-6"><span class="font-label-caps text-[10px] text-primary/60 block mb-1 uppercase tracking-widest">Предметы ЕГЭ</span><p class="font-body-sm text-on-surface">Математика (профиль), Русский язык, Биология / Информатика.</p></div>
+<div class="relative aspect-video rounded overflow-hidden border border-outline-variant/20">
+<img alt="Biological microchip technology" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB85BriVbVyCLKrpco9a0sZjnZrJJkBiQoLsv-OjaGtcAcasZjE7KWlb3i_-ikFmJuLepcJXbn42594yNf0QJU-27QGvXwY4ZhduwzeCxakbFN2VK-kVengrn3ur_VkgY_vDb7f4bRKdADyZkUwE8xAIB52BXoFeHfLsfnjMUGqv_Imvcc6BB_ViBwUH9ZuK3NcX93Nx11OvrZICCL_WxB4GEgEqckfJ74Z8SMLVuDEjF7bnFOjf8KrW6ynnQY3HND67C9j0fugx3M">
+</div>
+</div>
+</details>
+<details class="glass-card group overflow-hidden">
+<summary class="p-8 cursor-pointer">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] text-neon-cyan mb-2 block tracking-widest transition-all group-hover:animate-pulse">УЗЕЛ_04</span>
+<h3 class="font-serif-elegant text-headline-md text-white group-hover:text-primary transition-colors">Алгоритмическая дипломатия</h3>
+</div>
+<span class="material-symbols-outlined text-neon-cyan/50 expand-icon transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 space-y-6">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Использование прогнозных моделей больших данных и нейросетей для предотвращения геополитических конфликтов и оптимизации международных отношений.</p><div class="mt-4 mb-6"><span class="font-label-caps text-[10px] text-primary/60 block mb-1 uppercase tracking-widest">Предметы ЕГЭ</span><p class="font-body-sm text-on-surface">Русский язык, История / Обществознание, Информатика / Иностранный язык.</p></div>
+<div class="relative aspect-video rounded overflow-hidden border border-outline-variant/20">
+<img alt="Diplomacy analytics map" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3xWFR04AvQR8SUev7LJTUqZgYjMouu1iJRu42_JuWl7l20rMjqC0z7IbndyEgDtNVg2_sdXcPbMSM0EJSSWLWjgmLyQUiM2BAmKFce_vu45OI3h7y_oxl-Az46fuC_qsha5eMMZODg21jZUJcUMAKd_TeNCv1WqvGO7tZEzMBUQbmbItjW-dyw9ABNFw1als8lXDHTGMBzWx-IQaAEKGbb-WsTSFNQCKGem8U6cKZqS5wpnwuCVJ2vXYkj2Ur7lpoM-8XXRz9-NI">
+</div>
+</div>
+</details>
+<details class="glass-card group overflow-hidden">
+<summary class="p-8 cursor-pointer">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] text-neon-cyan mb-2 block tracking-widest transition-all group-hover:animate-pulse">УЗЕЛ_05</span>
+<h3 class="font-serif-elegant text-headline-md text-white group-hover:text-primary transition-colors">Квантовая криптография и защита узлов</h3>
+</div>
+<span class="material-symbols-outlined text-neon-cyan/50 expand-icon transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 space-y-6">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Разработка абсолютных систем шифрования данных на основе квантовых состояний фотонов, исключающих возможность несанкционированного доступа.</p><div class="mt-4 mb-6"><span class="font-label-caps text-[10px] text-primary/60 block mb-1 uppercase tracking-widest">Предметы ЕГЭ</span><p class="font-body-sm text-on-surface">Математика (профиль), Русский язык, Информатика / Физика.</p></div>
+<div class="relative aspect-video rounded overflow-hidden border border-outline-variant/20">
+<img alt="Quantum data computing security" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6kXwiQ0Ckc_Fg8OAFZrHNAcLzlRNbGsceukgvypFfJzbsf7hZAItvXdQWQeHzsgxcLZBgzp4RpjO1_QUL5f9PwPR7vCVj03gtoqfEdn4rOWp2qztEzaNwYtZ2LV3clyFclgTj1tXxLyyiE0pTaIPWT3Gn0rIs4zLEe6EMHVPscvHBDsZQD_QkpgUuCzyFrLEtwzo0feLYMDjgMM7N0l9ZZQt_9_oQxFtQLNsegWsIUfVa7cm8ywd0FLCavhoxhuv3uy-OxzkQ7IE">
+</div>
+</div>
+</details>
+<details class="glass-card group overflow-hidden">
+<summary class="p-8 cursor-pointer">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] text-neon-cyan mb-2 block tracking-widest transition-all group-hover:animate-pulse">УЗЕЛ_06</span>
+<h3 class="font-serif-elegant text-headline-md text-white group-hover:text-primary transition-colors">Генеративный промышленный дизайн</h3>
+</div>
+<span class="material-symbols-outlined text-neon-cyan/50 expand-icon transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 space-y-6">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Проектирование сложных архитектурных и машиностроительных объектов с использованием нейросетевых алгоритмов оптимизации формы и функции.</p><div class="mt-4 mb-6"><span class="font-label-caps text-[10px] text-primary/60 block mb-1 uppercase tracking-widest">Предметы ЕГЭ</span><p class="font-body-sm text-on-surface">Математика (профиль), Русский язык, Информатика / Физика.</p></div>
+<div class="relative aspect-video rounded overflow-hidden border border-outline-variant/20">
+<img alt="Robotic industrial design printer" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkCY3Y001keqSI7eguYasOkotHNRqJ-iLes266d6a663U1VlkIcrHaa3m22jlaheuE7tP-EXHWPqFsIJpzOFyt1VeeoJBoSeMrTDqCqR9e46EAyYoFxWQV_Wdhp3n0eao6KjnZLMfU1TG0PlkKr24z9Wr9il2od7xus_kw3EpkPIWiVTwg6n0zTU7auUlYcVsRP9h9uiLzJP4Q-6EO4rqkaFUVaV7Llqpg7diWSrglXkbfEy_TlCkVi6oSqvSRto5IhJ1K6ZbhPWE">
+</div>
+</div>
+</details>
+<details class="glass-card group overflow-hidden">
+<summary class="p-8 cursor-pointer">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] text-neon-cyan mb-2 block tracking-widest transition-all group-hover:animate-pulse">УЗЕЛ_07</span>
+<h3 class="font-serif-elegant text-headline-md text-white group-hover:text-primary transition-colors">Синтетическая биология и биоинженерия</h3>
+</div>
+<span class="material-symbols-outlined text-neon-cyan/50 expand-icon transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 space-y-6">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Моделирование и программирование новых цепочек ДНК для создания организмов с заданными полезными свойствами для медицины и экологии.</p><div class="mt-4 mb-6"><span class="font-label-caps text-[10px] text-primary/60 block mb-1 uppercase tracking-widest">Предметы ЕГЭ</span><p class="font-body-sm text-on-surface">Математика (профиль), Русский язык, Химия / Биология.</p></div>
+<div class="relative aspect-video rounded overflow-hidden border border-outline-variant/20">
+<img alt="Synthetic bio genetic code plant" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQlHTxmZJRgS-u2wWt_K_38Mgdrgj7PNiExEZ_Dbuwpn2BFfx5pUCeC4Q7uPGCtTAilGAxGETthl3XLjNiaS-Ggr_cJZlJkO4j2fXvpMsIhIaXDdrWevjL250bkFz8aapboVfScAFLrzJF96NhBIYDlpzf2F2mS7CFKp1ch9TWQ2NzyWb9lTRvC6R9Rb0NxGIgkRDdPQNOD7mCyv3bVom7Xo0DDniVhypLZWXTD2ZjdAicQbbu4sD0yHJONwBBG2jUBxwUP_xUBUg">
+</div>
+</div>
+</details>
+<details class="glass-card group overflow-hidden">
+<summary class="p-8 cursor-pointer">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] text-neon-cyan mb-2 block tracking-widest transition-all group-hover:animate-pulse">УЗЕЛ_08</span>
+<h3 class="font-serif-elegant text-headline-md text-white group-hover:text-primary transition-colors">Системы автономного роения</h3>
+</div>
+<span class="material-symbols-outlined text-neon-cyan/50 expand-icon transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 space-y-6">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">Программирование коллективного разума для групп квадрокоптеров, способных выполнять сложные задачи в динамически меняющейся среде.</p><div class="mt-4 mb-6"><span class="font-label-caps text-[10px] text-primary/60 block mb-1 uppercase tracking-widest">Предметы ЕГЭ</span><p class="font-body-sm text-on-surface">Математика (профиль), Русский язык, Информатика / Физика.</p></div>
+<div class="relative aspect-video rounded overflow-hidden border border-outline-variant/20">
+<img alt="Autonomous drone swarm formation" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIvFAQn31eP6ZgK9U1d_Qu6dGs3_76QUfw4I0MV1skGv6Qoj3n67VNX_7raJR2hv7hnhi_AJ57UduBiSKTZHzwvLuXJHNmGk96rJF_JZPQcwg_qKiYBu7z_NE13JCu0ETYGWJ3diTweIUFDH849u95Bk7CduKcB9myNh8PIOep5cPhz92Zap6VBgSBLE89oWZ8Ktt1E-rNDMuhIFngJDhn0RNtvmGQMSJ-Dq-Hc9N_xmQNf5Hqfv3z0ybp_5iHXM-_4kb8Cn4CdeQ">
+</div>
+</div>
+</details>
+<details class="glass-card group overflow-hidden md:col-span-2">
+<summary class="p-8 cursor-pointer">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-[10px] text-neon-cyan mb-2 block tracking-widest transition-all group-hover:animate-pulse">УЗЕЛ_09</span>
+<h3 class="font-serif-elegant text-headline-md text-white group-hover:text-primary transition-colors">Нейрокогнитивная лингвистика ИИ</h3>
+</div>
+<span class="material-symbols-outlined text-neon-cyan/50 expand-icon transition-transform duration-300">expand_more</span>
+</div>
+</summary>
+<div class="px-8 pb-8 space-y-8 flex flex-col md:flex-row gap-8">
+<div class="md:w-1/2">
+<p class="font-body-sm text-on-surface-variant leading-relaxed mb-6">Создание языковых моделей нового поколения, способных не только генерировать текст, но и понимать семантические и эмоциональные пласты человеческой коммуникации.</p><div class="mt-4 mb-6"><span class="font-label-caps text-[10px] text-primary/60 block mb-1 uppercase tracking-widest">Предметы ЕГЭ</span><p class="font-body-sm text-on-surface">Русский язык, Иностранный язык, Информатика / Литература.</p></div>
+<button class="border border-neon-cyan/30 text-neon-cyan px-8 py-3 font-label-caps text-[10px] tracking-widest hover:bg-neon-cyan/10 transition-colors">ПОДРОБНЕЕ О ПРОГРАММЕ</button>
+</div>
+<div class="md:w-1/2 relative aspect-video rounded overflow-hidden border border-outline-variant/20">
+<img alt="Linguistic neon alphabet art" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlRQQKjJLzUdS301e0SQsDB6vlZR61JOVHVJWmWPUZTQ-zbHKJYaBj8iKsGOTyPoiG585P-sfHFUuVANW8fUgXibW36jmbnHg5CWU3P3iML0LzdALlh4vcgVGkdQSt9bz_5tVs7LU75KG1I3qbgmR5D2fvTJQ9DuN9ZpvHvWikLmcRW-u5Z45DTE6kGK_CY6YgdWOTvXYtApiCk71nqjdUezgUDkg-WGtuqj-_1yKFgovfpkdUE4GxNZtdQOs_5o8u-cOko2XgD-4">
+</div>
+</div>
+</details>
+</div>
+</section>
+</main>
+<footer class="bg-surface-container-lowest full-width relative mt-40 border-t border-primary/20 bg-gradient-to-b from-surface-container-lowest to-background">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="space-y-8">
+<div class="font-headline-md text-headline-md text-primary opacity-50">AXIOMA-M</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant max-w-xs">
+                    ИНСТИТУТ ПЕРЕДОВЫХ ИССЛЕДОВАНИЙ В ОБЛАСТИ ИСКУССТВЕННОГО ИНТЕЛЛЕКТА И НЕЙРОТЕХНОЛОГИЙ.
+                </p>
+<div class="text-[10px] font-label-caps text-on-surface-variant opacity-40">
+                    © 2025 AXIOMA-M RESEARCH INSTITUTION. ALL RIGHTS RESERVED.
+                </div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="flex flex-col space-y-4">
+<span class="font-label-caps text-primary mb-2">DIRECTORY</span>
+<a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Protocol</a>
+<a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Neural Ethics</a>
+</div>
+<div class="flex flex-col space-y-4">
+<span class="font-label-caps text-primary mb-2">NETWORK</span>
+<a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="admission.html">Global Access</a>
+<a class="font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="admission.html">Contact Terminal</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

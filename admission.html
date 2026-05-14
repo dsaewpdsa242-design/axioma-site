@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Поступление | AXIOMA-M AI UNIVERSITY</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=JetBrains+Mono:wght@300..800&amp;family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#7df4ff",
+                    "inverse-primary": "#006970",
+                    "surface-container": "#20201f",
+                    "surface": "#131313",
+                    "tertiary-fixed-dim": "#c9c6c5",
+                    "tertiary-container": "#dcd9d8",
+                    "secondary-container": "#484949",
+                    "on-surface-variant": "#b9cacb",
+                    "on-background": "#e5e2e1",
+                    "error": "#ffb4ab",
+                    "surface-variant": "#353535",
+                    "surface-bright": "#393939",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "secondary-fixed": "#e3e2e2",
+                    "on-primary-fixed": "#002022",
+                    "tertiary": "#f9f5f5",
+                    "inverse-surface": "#e5e2e1",
+                    "on-secondary-container": "#b8b8b8",
+                    "secondary": "#c6c6c6",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-surface": "#e5e2e1",
+                    "outline": "#849495",
+                    "on-secondary": "#2f3131",
+                    "on-secondary-fixed-variant": "#464747",
+                    "on-primary": "#00363a",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#353535",
+                    "on-tertiary-container": "#605e5e",
+                    "on-primary-fixed-variant": "#004f54",
+                    "primary-container": "#00f0ff",
+                    "tertiary-fixed": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "primary": "#dbfcff",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "on-tertiary": "#313030",
+                    "surface-tint": "#00dbe9",
+                    "surface-dim": "#131313",
+                    "primary-fixed-dim": "#00dbe9",
+                    "on-primary-container": "#006970",
+                    "inverse-on-surface": "#313030",
+                    "surface-container-high": "#2a2a2a",
+                    "error-container": "#93000a",
+                    "outline-variant": "#3b494b",
+                    "background": "#131313",
+                    "surface-container-low": "#1c1b1b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "margin-desktop": "80px",
+                    "unit": "4px",
+                    "gutter": "24px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Geist"],
+                    "display-hero": ["Space Grotesk"],
+                    "body-lg": ["Geist"],
+                    "headline-md": ["Space Grotesk"],
+                    "headline-lg-mobile": ["Space Grotesk"],
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-lg": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "150%", "fontWeight": "400"}],
+                    "display-hero": ["120px", {"lineHeight": "110%", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "160%", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "130%", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["40px", {"lineHeight": "120%", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "100%", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "headline-lg": ["64px", {"lineHeight": "120%", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(229, 226, 225, 0.1);
+            border-top: 0.5px solid #00f0ff;
+        }
+        .neon-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+            box-shadow: 0 0 8px #00f0ff;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gosuslugi-btn {
+            background-color: #0D4CD3;
+            color: white;
+            box-shadow: 0 0 15px rgba(13, 76, 211, 0.4);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b494b;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container font-body-lg text-body-lg">
+<header class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-xl border-b border-outline-variant/10">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<a href="index.html" class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">AXIOMA-M</a>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="index.html">Исследования</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="departments.html">Кафедры</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300" href="archive.html">Архивы</a>
+<a class="font-label-caps text-label-caps text-primary relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="admission.html">Поступление</a>
+</nav>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-caps text-label-caps scale-95 active:scale-90 transition-transform uppercase">Подключить узел</button>
+</div>
+</header>
+<main class="mt-24 space-y-40 mb-40">
+<section class="px-margin-desktop max-w-container-max mx-auto pt-20 flex flex-col items-center text-center">
+<div class="inline-block px-4 py-1 border border-primary/30 rounded-full font-label-caps text-label-caps text-primary-fixed mb-8 animate-pulse">
+            ПРИЕМНАЯ КАМПАНИЯ 2025/26
+        </div>
+<h1 class="font-display-hero text-display-hero uppercase leading-none tracking-tighter mb-8">
+            НЕЙРОННЫЕ <span class="text-primary-fixed-dim">ГОРИЗОНТЫ</span>
+</h1>
+<p class="max-w-2xl text-on-surface-variant font-body-lg text-body-lg mb-12">
+            Ваше будущее начинается с алгоритма. Выберите свой путь в AXIOMA-M — ведущем AI-университете мира, где академическая строгость встречается с вычислительным превосходством.
+        </p>
+<div class="flex gap-6">
+<a class="bg-primary-fixed text-on-primary-fixed px-8 py-4 font-label-caps text-label-caps hover:shadow-[0_0_20px_#7df4ff] transition-all" href="#direct-apply">БЫСТРЫЙ СТАРТ</a>
+<a class="border border-outline px-8 py-4 font-label-caps text-label-caps hover:bg-surface-variant transition-all" href="#gosuslugi">ГОСУСЛУГИ</a>
+</div>
+</section>
+<section class="px-margin-desktop max-w-container-max mx-auto scroll-mt-32" id="direct-apply">
+<div class="neon-divider mb-16"></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-8">Способ 1.<br/><span class="text-primary-fixed-dim">Быстрая подача через сайт</span></h2>
+<p class="text-on-surface-variant mb-12">Прямая интеграция с нашей внутренней нейросетью для ускоренной обработки данных. Получите предварительное решение в течение 48 часов.</p>
+<div class="relative rounded-xl overflow-hidden aspect-[4/5] glass-card">
+<img alt="Applying Online" class="w-full h-full object-cover mix-blend-luminosity opacity-40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxGtf_5PwPev1Woo2P1LbfDx4Ju1O_imE_9HX7bEqFffhRTNqF0LNh2szOehVQa1ex-MYgMlNXavJ40qJ4ZcX7W3eL4yVPbpIoBRE8irl2QlnzLzFkID5sOiiPyXJ02BSXrOpbRXyhf9qFeHJ-YBZBpbicYLdjm2c1srjAADkWG5PR6n2h_OQy01W4rEPVxMQyEtyN1FmBu8p1khSgnaEcPvaEhMsizjP3EzgpytU4vsOJVYUIVmGUifgX6OtQ_-kyAYphXUQIRNs"/>
+<div class="absolute inset-0 p-10 flex flex-col justify-end">
+<div class="font-label-caps text-label-caps text-primary mb-2">ИНТЕРФЕЙС ВЕРСИЯ 4.0</div>
+<div class="font-headline-md text-headline-md">ОПТИМИЗИРОВАННЫЙ ПРОЦЕСС</div>
+</div>
+</div>
+</div>
+<div class="glass-card p-10 rounded-xl space-y-8">
+<div class="space-y-6">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">ФИО ПОЛНОСТЬЮ</label>
+<input id="fullName" class="w-full bg-transparent border-b border-outline-variant focus:border-primary-fixed outline-none py-3 font-body-lg text-body-lg transition-all text-on-surface" placeholder="Иванов Иван Иванович" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">ТЕЛЕФОН</label>
+<input id="phone" class="w-full bg-transparent border-b border-outline-variant focus:border-primary-fixed outline-none py-3 font-body-lg text-body-lg transition-all text-on-surface" placeholder="+7 (000) 000-00-00" type="tel"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">EMAIL</label>
+<input id="email" class="w-full bg-transparent border-b border-outline-variant focus:border-primary-fixed outline-none py-3 font-body-lg text-body-lg transition-all text-on-surface" placeholder="neural@axioma.edu" type="email"/>
+</div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-2">СНИЛС / ID</label>
+<input id="snils" class="w-full bg-transparent border-b border-outline-variant focus:border-primary-fixed outline-none py-3 font-body-lg text-body-lg transition-all text-on-surface" placeholder="123-456-789 00" type="text"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-4 uppercase">РЕЗУЛЬТАТЫ ЕГЭ</label>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container p-4 border border-outline-variant/30">
+<span class="text-[10px] font-label-caps text-on-surface-variant">МАТЕМАТИКА</span>
+<input id="mathScore" class="bg-transparent w-full text-center font-display-hero text-headline-md outline-none" placeholder="00" type="number"/>
+</div>
+<div class="bg-surface-container p-4 border border-outline-variant/30">
+<span class="text-[10px] font-label-caps text-on-surface-variant">РУССКИЙ</span>
+<input id="russianScore" class="bg-transparent w-full text-center font-display-hero text-headline-md outline-none" placeholder="00" type="number"/>
+</div>
+<div class="bg-surface-container p-4 border border-outline-variant/30">
+<span class="text-[10px] font-label-caps text-on-surface-variant">ИНФ/ФИЗ</span>
+<input id="thirdScore" class="bg-transparent w-full text-center font-display-hero text-headline-md outline-none" placeholder="00" type="number"/>
+</div>
+</div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-2 uppercase">ИНДИВИДУАЛЬНЫЕ ДОСТИЖЕНИЯ</label>
+<select class="w-full bg-transparent border-b border-outline-variant focus:border-primary-fixed outline-none py-3 font-body-lg text-body-lg transition-all text-on-surface appearance-none">
+<option class="bg-surface">Победа в олимпиаде РСОШ</option>
+<option class="bg-surface">Золотая медаль / Красный диплом</option>
+<option class="bg-surface">Спортивные достижения (ГТО)</option>
+<option class="bg-surface">Нет достижений</option>
+</select>
+</div>
+<div class="p-8 border-2 border-dashed border-outline-variant flex flex-col items-center justify-center gap-4 hover:border-primary-fixed transition-colors group cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:text-primary-fixed">cloud_upload</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant">СКАН ПАСПОРТА И ДИПЛОМА (PDF)</p>
+</div>
+</div>
+<button onclick="submitApplication()" class="w-full bg-primary-fixed text-on-primary-fixed py-6 font-label-caps text-label-caps font-bold text-lg hover:shadow-[0_0_30px_#7df4ff] transition-all flex items-center justify-center gap-3">
+                    ОТПРАВИТЬ ЗАЯВЛЕНИЕ НА ПРОВЕРКУ
+                    <span class="material-symbols-outlined">bolt</span>
+</button>
+</div>
+</div>
+</section>
+<section class="px-margin-desktop max-w-container-max mx-auto scroll-mt-32" id="gosuslugi">
+<div class="neon-divider mb-16"></div>
+<div class="mb-20">
+<h2 class="font-headline-lg text-headline-lg mb-4">Способ 2.<br/><span class="text-[#0D4CD3]">Суперсервис «Госуслуги»</span></h2>
+<p class="text-on-surface-variant max-w-2xl">Единый портал государственных услуг — самый надежный способ подать документы во все филиалы AXIOMA-M одновременно.</p>
+</div>
+<div class="relative space-y-24">
+<div class="absolute left-8 top-0 bottom-0 w-[1px] bg-gradient-to-b from-[#0D4CD3] via-[#0D4CD3]/50 to-transparent"></div>
+<div class="flex flex-col md:flex-row gap-12 relative group">
+<div class="w-16 h-16 rounded-full bg-[#0D4CD3] text-white flex items-center justify-center z-10 shrink-0 font-headline-md">1</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
+<div class="space-y-6">
+<h3 class="font-headline-md text-headline-md">Авторизация и проверка данных</h3>
+<p class="text-on-surface-variant font-body-lg">Войдите под своей учетной записью. Убедитесь, что паспортные данные и СНИЛС актуальны. Система автоматически подтянет ваши баллы ЕГЭ.</p>
+<button class="gosuslugi-btn px-8 py-4 rounded-lg font-label-caps text-label-caps flex items-center gap-3 hover:scale-105 transition-transform">
+                            ПРОВЕРИТЬ ПРОФИЛЬ НА ГОСУСЛУГАХ
+                            <span class="material-symbols-outlined">open_in_new</span>
+</button>
+</div>
+<div class="rounded-xl overflow-hidden glass-card h-64">
+<img alt="Secure Login Interface" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhfoYphPTOALbrU4I6ufV35HU6y0BbaHQiwsX4zrGQcBSiEIzsbH0FIBhsWNsdoOCMj5eybpgYlfzaMGF3f1dfYSV8iISXdvDkseUH6_3X4_ISGtrfIdSO1nhkHW47QTmGtDtqYnzDer5LdadOQ7gyKRn05pNgg-6yS8-dAzPVje52WIgdV0EyOxCLM0KC5Q5KvsPMRpNdz-FtBKbDICxwfy6B73TH6cNJc-kwKPfFZZ_DWFlpd4rAeVGAbM7o6NIUGzLLLfk8cWs"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-12 relative group">
+<div class="w-16 h-16 rounded-full bg-[#0D4CD3] text-white flex items-center justify-center z-10 shrink-0 font-headline-md">2</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
+<div class="rounded-xl overflow-hidden glass-card h-64 order-2 md:order-1">
+<img alt="Major Selection View" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsASgrnaQXag4HT5ldPknrO_NSpHYVrMXZ5uRktyr7n7oNbqT_qhHEnjhbeJL7ZOXN4v-MMf00XueTGCVZLI5VvFJPkjuoCCFGrqGmlUmBwvNKU2U-Dw7U-RJ2J3wvT4aXQym0gbH-mhRGBMoST9Bvwu7tQUQz4fyKAGra-0mCsR6OdfKrnLzMLk-F7D5oG7fhe9it-PVKxho42NRT5imXjpGhN05QPXbsb3ER8PgqmCm__Srem5l8sWZYjW42FOtIy0Tx_L4b2PU"/>
+</div>
+<div class="space-y-6 order-1 md:order-2">
+<h3 class="font-headline-md text-headline-md">Выбор направлений в AXIOMA-M</h3>
+<p class="text-on-surface-variant font-body-lg">Вы можете выбрать до 5 направлений подготовки. Ориентируйтесь на свои интересы: от квантовых вычислений до нейроархитектуры.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-variant rounded text-xs font-label-caps">AI RESEARCH</span>
+<span class="px-3 py-1 bg-surface-variant rounded text-xs font-label-caps">CYBERSECURITY</span>
+<span class="px-3 py-1 bg-surface-variant rounded text-xs font-label-caps">BIO-DATA</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-12 relative group">
+<div class="w-16 h-16 rounded-full bg-[#0D4CD3] text-white flex items-center justify-center z-10 shrink-0 font-headline-md">3</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
+<div class="space-y-6">
+<h3 class="font-headline-md text-headline-md">Подача электронного заявления</h3>
+<p class="text-on-surface-variant font-body-lg">Расставьте приоритеты зачисления. Это критический шаг: если вы пройдете на первый приоритет, остальные аннулируются.</p>
+<div class="p-4 border border-[#0D4CD3]/30 rounded-lg bg-[#0D4CD3]/5 flex items-start gap-4">
+<span class="material-symbols-outlined text-[#0D4CD3]">info</span>
+<span class="text-body-sm text-on-surface-variant">Приоритеты можно менять до окончания срока приема документов.</span>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden glass-card h-64">
+<img alt="Submission Interface" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALk_nDxUTaCwkDOv_6c6iNWsdgRUOgAskKRm9HLtvbUe-wr37SFLl_VTr8KNdwTH6uveKi_vZpZaF0kdOaULbPuFgtkadQNhT-5JK9zu8Oi5lmaU3sOqvsVp4M720duk1-VW3Ai8T5WX7CcXSB6eZW0RoGqKZ9kQGha9KWkLsDCTRah3_cG6a0jsKjaONJCKMy3VN2ewDsaPgFVmDwQacxJStFnJ3nYazdIbcTwfgY-WLzwOTVX9r3_pbdVYTN2D8M6I0bTma3ZNA"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-12 relative group">
+<div class="w-16 h-16 rounded-full bg-[#0D4CD3] text-white flex items-center justify-center z-10 shrink-0 font-headline-md">4</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
+<div class="rounded-xl overflow-hidden glass-card h-64 order-2 md:order-1">
+<img alt="Competition Monitoring" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLqtlrgoVojppbYFRgAc7QrDQ_6PMY58Nc2Nvd9i_ExEQg6DPwx2QzgMt3AWm7ywZ0HYkKJMrKXR7b6HT-BWq19BEY6YJWNr8Z8nGSjhjOIxYa9d9z4laRisA0DphCDNQwkvKtBs5mmimOXVlqYi1UMoJ78QSQCm_ANnCYouqTglXrr-3jPzfCqMyKU8wozZwOFGshCJ5ZWQvH2TV5BiqlJnijZMICM2-97TqLfL3rVVbj7VCs1Szm_5g-TBwc4D0O8wuElEZtGUU"/>
+</div>
+<div class="space-y-6 order-1 md:order-2">
+<h3 class="font-headline-md text-headline-md">Мониторинг конкурсной ситуации</h3>
+<p class="text-on-surface-variant font-body-lg">Следите за своим местом в рейтинговых списках в режиме реального времени. Наша система обновляет данные каждые 5 минут.</p>
+<div class="flex items-center gap-4 text-primary-fixed">
+<span class="material-symbols-outlined animate-spin">sync</span>
+<span class="font-label-caps text-label-caps">ОБНОВЛЕНИЕ В РЕАЛЬНОМ ВРЕМЕНИ</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-12 relative group">
+<div class="w-16 h-16 rounded-full bg-[#0D4CD3] text-white flex items-center justify-center z-10 shrink-0 font-headline-md">5</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full">
+<div class="space-y-6">
+<h3 class="font-headline-md text-headline-md">Отправка оригинала и зачисление</h3>
+<p class="text-on-surface-variant font-body-lg">Поставьте отметку о подаче оригинала документа об образовании на Госуслугах. Это финальное подтверждение вашего намерения учиться в AXIOMA-M.</p>
+<button class="border border-outline px-8 py-4 rounded-lg font-label-caps text-label-caps hover:bg-surface-variant transition-all">
+                            СРОКИ И ДАТЫ ПРИКАЗОВ
+                        </button>
+</div>
+<div class="rounded-xl overflow-hidden glass-card h-64">
+<img alt="Celebrating Admission" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBb9GgEJriZKLqh1ae458yv2k_L1QV0V8OHDIu7pUwPYurcGuBL_6PQItmdHuZEDrW6bHoPfAiShHZLIyEDW6DWiH2S5KDmWMuTGUXX1fpb1EQsgvGZN2X-V-dKs_ylXQVpnfjAB6MYUV8j4RiAFWuWffwF7WP3ObEr6uCiCSywQAJjeMCuJiNmitMyRnykrpOgMjC0Ei-943dbKbT43033tVu4ZyM4duyxD4ZNqNqJ3F1eLl4P0eOCyY4KQLKjmf8N6MYyqWkV9c"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 px-margin-desktop max-w-container-max mx-auto bg-[#000000] border-t border-white/10">
+<div class="max-w-container-max mx-auto relative z-10">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-white mb-4 text-glow-white uppercase tracking-wider">РЕЙТИНГ АБИТУРИЕНТОВ</h2>
+<div class="h-px w-32 bg-[#00E5FF] mx-auto shadow-[0_0_10px_#00E5FF]"></div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="flex-grow lg:w-2/3 glass-card p-1 border border-white/10">
+<div class="overflow-y-auto max-h-[550px]">
+<style>
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: #000; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #111; border-radius: 3px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #00E5FF; }
+.row-glow:hover { background: rgba(0, 229, 255, 0.05); }
+</style>
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 z-20 bg-black/90 backdrop-blur-md border-b border-[#00E5FF]/20">
+<tr>
+<th class="px-6 py-4 font-label-caps text-[10px] text-[#00E5FF] uppercase tracking-widest">Место</th>
+<th class="px-6 py-4 font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">ID / СНИЛС</th>
+<th class="px-6 py-4 font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">ФИО Абитуриента</th>
+<th class="px-6 py-4 font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest text-center">Сумма ЕГЭ</th>
+<th class="px-6 py-4 font-label-caps text-[10px] text-[#00E5FF] uppercase tracking-widest text-right">Средний балл</th>
+</tr>
+</thead>
+<tbody id="rankingTableBody" class="divide-y divide-white/5">
+<tr><td colspan="5" class="px-6 py-4 text-center text-on-surface-variant">Загрузка данных...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="lg:w-1/3 flex flex-col gap-6">
+<div class="glass-card p-8 flex flex-col items-center text-center space-y-6">
+<div class="space-y-2">
+<p class="font-label-caps text-[10px] text-[#00E5FF] tracking-[0.2em] uppercase">СЛЕДУЮЩЕЕ ОБНОВЛЕНИЕ</p>
+<div id="timerDisplay" class="font-display-hero text-5xl text-white tabular-nums">05:00</div>
+</div>
+<div class="p-4 bg-white/5 border border-white/10 rounded-lg">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">
+              Данные рейтинга синхронизируются с центральным ядром AXIOMA-M в режиме реального времени.
+            </p>
+</div>
+<div class="flex items-center gap-3 px-6 py-3 border border-[#00E5FF]/30 rounded-full bg-[#00E5FF]/5">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-[#00E5FF]"></span>
+</span>
+<span class="font-label-caps text-xs text-[#00E5FF] tracking-widest font-bold">СЕРВЕР: СВЯЗЬ АКТИВНА</span>
+</div>
+</div>
+<div class="glass-card p-8">
+<h4 class="font-label-caps text-xs text-white mb-4 tracking-widest">СТАТИСТИКА ПОТОКА</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-white/5 pb-2">
+<span class="text-on-surface-variant text-sm">Всего абитуриентов</span>
+<span id="totalApplicants" class="text-[#00E5FF] font-bold">0</span>
+</div>
+<div class="flex justify-between items-end border-b border-white/5 pb-2">
+<span class="text-on-surface-variant text-sm">Средний балл по узлу</span>
+<span id="avgScore" class="text-[#00E5FF] font-bold">0.0</span>
+</div>
+<div class="flex justify-between items-end border-b border-white/5 pb-2">
+<span class="text-on-surface-variant text-sm">Мест в квоте</span>
+<span class="text-[#00E5FF] font-bold">150</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full py-20 bg-surface border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-gutter max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-on-surface font-bold tracking-tighter mb-8 md:mb-0">AXIOMA-M</div>
+<div class="flex flex-col items-center md:items-end gap-6">
+<div class="flex gap-8">
+<a class="font-body-sm text-body-sm text-on-secondary-fixed-variant hover:text-primary-fixed transition-all opacity-80" href="#">Протокол конфиденциальности</a>
+<a class="font-body-sm text-body-sm text-on-secondary-fixed-variant hover:text-primary-fixed transition-all opacity-80" href="#">Условия исследований</a>
+<a class="font-body-sm text-body-sm text-on-secondary-fixed-variant hover:text-primary-fixed transition-all opacity-80" href="#">Нейроэтика</a>
+<a class="font-body-sm text-body-sm text-on-secondary-fixed-variant hover:text-primary-fixed transition-all opacity-80" href="#">Поддержка</a>
+</div>
+<div class="font-body-sm text-body-sm text-secondary uppercase tracking-widest opacity-60">
+                © 2025 AXIOMA-M AI UNIVERSITY. НЕЙРОННЫЕ ГРАНИЦЫ ЗАЩИЩЕНЫ.
+            </div>
+</div>
+</div>
+</footer>
+<script>
+    // Инициализация клиента Supabase (Строго один раз на всю страницу)
+    supabase = window.supabase.createClient('https://knwqhzuegzjbqqvrfggo.supabase.co', 'sb_publishable_lwr9wFjKInl2-xmgNWLtGw_kkgIqSHo');
+
+    let timerSeconds = 300;
+
+    // 1. ФУНКЦИЯ ЗАГРУЗКИ ДАННЫХ И РАСЧЕТА СТАТИСТИКИ
+    async function loadRankingData() {
+        try {
+            const { data, error } = await supabase
+                .from('applicants')
+                .select('snils_or_id, full_name, total_ege_score')
+                .order('total_ege_score', { ascending: false })
+                .limit(100);
+            
+            if (error) throw error;
+            
+            const container = document.getElementById('rankingTableBody');
+            if (!container) return; // Защита от ошибок, если элемент еще не создался
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-white/40">Нет данных. Будьте первыми!</td></tr>';
+                document.getElementById('totalApplicants').textContent = '0';
+                document.getElementById('avgScore').textContent = '0.0';
+                return;
+            }
+            
+            // Динамическая отрисовка строк таблицы в правильном порядке
+            let rows = '';
+            data.forEach((applicant, index) => {
+                const avgScore = (applicant.total_ege_score / 3).toFixed(2);
+                rows += '<tr class="row-glow transition-colors" style="border-bottom: 1px solid rgba(255,255,255,0.05);">' +
+                    '<td class="px-6 py-4 font-label-caps text-[#00E5FF] font-bold">' + String(index + 1).padStart(3, '0') + '</td>' +
+                    '<td class="px-6 py-4 font-label-caps text-xs text-white/60">' + (applicant.snils_or_id || '—') + '</td>' +
+                    '<td class="px-6 py-4 text-white font-medium">' + applicant.full_name + '</td>' +
+                    '<td class="px-6 py-4 text-center text-white/80">' + applicant.total_ege_score + '</td>' +
+                    '<td class="px-6 py-4 font-label-caps text-[#00E5FF] text-right">' + avgScore + '</td></tr>';
+            });
+            container.innerHTML = rows;
+            
+            // Расчет реальной статистики потока
+            const totalCount = data.length;
+            const sumScores = data.reduce((sum, a) => sum + (a.total_ege_score || 0), 0);
+            const avgScoreAll = totalCount > 0 ? (sumScores / 3 / totalCount).toFixed(1) : '0.0';
+            
+            // Вывод данных в правую панель
+            if(document.getElementById('totalApplicants')) document.getElementById('totalApplicants').textContent = totalCount.toLocaleString();
+            if(document.getElementById('avgScore')) document.getElementById('avgScore').textContent = avgScoreAll;
+            
+        } catch (err) {
+            console.error('Ошибка загрузки данных из Supabase:', err);
+        }
+    }
+
+    // 2. ЛОГИКА РАБОТЫ ТАЙМЕРА (ОБРАТНЫЙ ОТСЧЕТ)
+    function updateTimer() {
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        const timerDisplay = document.getElementById('timerDisplay');
+        
+        if (timerDisplay) {
+            timerDisplay.textContent = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+        }
+        
+        if (timerSeconds <= 0) {
+            timerSeconds = 300; // Сброс обратно на 5 минут
+            loadRankingData();  // Автоматическое обновление данных из БД
+        } else {
+            timerSeconds--;
+        }
+    }
+
+    // 3. ФУНКЦИЯ ОТПРАВКИ ФОРМЫ НАПРЯМУЮ В БД
+    async function submitApplication(event) {
+        if (event) event.preventDefault(); // Защита от перезагрузки страницы при отправке
+        
+        const fullName = document.getElementById('fullName').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const snilsInput = document.getElementById('snils').value;
+        
+        const mathScore = parseInt(document.getElementById('mathScore').value) || 0;
+        const russianScore = parseInt(document.getElementById('russianScore').value) || 0;
+        const thirdScore = parseInt(document.getElementById('thirdScore').value) || 0;
+        
+        if (!fullName || !phone || !email) {
+            alert('Пожалуйста, заполните все обязательные поля (ФИО, Телефон, Email)');
+            return;
+        }
+        
+        // Автоматическое суммирование баллов ЕГЭ
+        const totalScore = mathScore + russianScore + thirdScore;
+        const snilsOrId = snilsInput || phone; // Если СНИЛС не введен, используем телефон как ID
+        
+        try {
+            const { error } = await supabase
+                .from('applicants')
+                .insert([{
+                    snils_or_id: snilsOrId,
+                    full_name: fullName,
+                    total_ege_score: Number(totalScore)
+                }]);
+            
+            if (error) throw error;
+            
+            // Полная очистка полей формы после успешной отправки
+            document.getElementById('fullName').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('snils').value = '';
+            document.getElementById('mathScore').value = '';
+            document.getElementById('russianScore').value = '';
+            document.getElementById('thirdScore').value = '';
+            
+            alert('Заявление успешно принято в базу данных AXIOMA-M!');
+            loadRankingData(); // Мгновенное обновление таблицы результатов
+            
+        } catch (err) {
+            console.error('Критическая ошибка отправки:', err);
+            alert('Ошибка при отправке заявления. Проверьте подключение к Live Server.');
+        }
+    }
+
+    // 4. ЗАПУСК ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
+    document.addEventListener('DOMContentLoaded', function() {
+        loadRankingData();
+        setInterval(updateTimer, 1000);
+        
+        // Связываем функцию с вашей кнопкой формы
+        const submitBtn = document.querySelector('button[onclick*="submitApplication"]') || document.getElementById('submitBtn');
+        if (submitBtn) {
+            // Убираем инлайновый onclick, чтобы избежать конфликтов видимости функций
+            submitBtn.removeAttribute('onclick');
+            submitBtn.addEventListener('click', submitApplication);
+        }
+    });
+</script>
+
+</body></html>

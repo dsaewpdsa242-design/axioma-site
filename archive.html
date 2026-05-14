@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Archives | AXIOMA-M AI UNIVERSITY</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Geist:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-error-container": "#ffdad6",
+                "surface-dim": "#131313",
+                "tertiary-container": "#dcd9d8",
+                "secondary-container": "#484949",
+                "tertiary-fixed-dim": "#c9c6c5",
+                "on-tertiary": "#313030",
+                "on-surface": "#e5e2e1",
+                "inverse-surface": "#e5e2e1",
+                "on-tertiary-container": "#605e5e",
+                "surface-variant": "#353535",
+                "surface": "#131313",
+                "on-secondary": "#2f3131",
+                "surface-tint": "#00dbe9",
+                "on-surface-variant": "#b9cacb",
+                "on-primary-container": "#006970",
+                "surface-bright": "#393939",
+                "on-primary-fixed-variant": "#004f54",
+                "tertiary-fixed": "#e5e2e1",
+                "inverse-primary": "#006970",
+                "secondary-fixed-dim": "#c6c6c6",
+                "primary-container": "#00f0ff",
+                "secondary": "#c6c6c6",
+                "outline-variant": "#3b494b",
+                "error": "#ffb4ab",
+                "surface-container-highest": "#353535",
+                "on-tertiary-fixed": "#1c1b1b",
+                "on-secondary-fixed": "#1a1c1c",
+                "primary-fixed-dim": "#00dbe9",
+                "primary": "#dbfcff",
+                "outline": "#849495",
+                "tertiary": "#f9f5f5",
+                "on-tertiary-fixed-variant": "#474646",
+                "surface-container-low": "#1c1b1b",
+                "background": "#131313",
+                "on-error": "#690005",
+                "on-secondary-container": "#b8b8b8",
+                "on-background": "#e5e2e1",
+                "secondary-fixed": "#e3e2e2",
+                "inverse-on-surface": "#313030",
+                "surface-container-lowest": "#0e0e0e",
+                "on-primary-fixed": "#002022",
+                "surface-container-high": "#2a2a2a",
+                "surface-container": "#20201f",
+                "on-primary": "#00363a",
+                "on-secondary-fixed-variant": "#464747",
+                "error-container": "#93000a",
+                "primary-fixed": "#7df4ff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "container-max": "1440px",
+                "unit": "4px",
+                "margin-mobile": "20px",
+                "margin-desktop": "80px",
+                "gutter": "24px"
+        },
+        "fontFamily": {
+                "body-sm": ["Geist"],
+                "body-lg": ["Geist"],
+                "label-caps": ["JetBrains Mono"],
+                "headline-md": ["Space Grotesk"],
+                "headline-lg-mobile": ["Space Grotesk"],
+                "display-hero": ["Space Grotesk"],
+                "headline-lg": ["Space Grotesk"]
+        }
+      },
+    },
+  }
+</script>
+<style>
+    :root {
+        --deep-space: #0e0e0e;
+        --accent-cyan: #00f0ff;
+    }
+    body {
+        background-color: var(--deep-space);
+        color: #e5e2e1;
+        background-image: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 80%);
+        background-attachment: fixed;
+    }
+    .digital-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        background-image: 
+            radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+            radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+            radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
+            radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+            radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+            radial-gradient(2px 2px at 160px 120px, #fff, rgba(0,0,0,0));
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        opacity: 0.1;
+    }
+    .neon-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        box-shadow: 0 0 8px var(--accent-cyan);
+    }
+    .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        border-top: 0.5px solid rgba(0, 240, 255, 0.3);
+        border-left: 0.5px solid rgba(255, 255, 255, 0.05);
+    }
+    .chrome-text {
+        background: linear-gradient(180deg, #dbfcff 0%, #849495 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .chrome-button {
+        background: linear-gradient(180deg, #e5e2e1 0%, #849495 100%);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 2px 4px rgba(0,0,0,0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .chrome-button:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.1);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 4px 8px rgba(0,240,255,0.3);
+    }
+
+    .glitch-logo {
+        position: relative;
+        text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                     -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                     0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+        animation: glitch 500ms infinite;
+    }
+    @keyframes glitch {
+        0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+        14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+        15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+        49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+        50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+        99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+        100% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75); }
+    }
+
+    #timeline-viewport {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    }
+    #timeline-track {
+        display: flex;
+        gap: 40px;
+        padding: 80px 0;
+        width: max-content;
+    }
+    .timeline-card-3d {
+        width: 320px;
+        flex-shrink: 0;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #1c1b1b;
+        border: 1px solid #3b494b;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+        filter: blur(2px);
+        opacity: 0.6;
+    }
+    .timeline-card-3d.active {
+        transform: scale(1.1);
+        filter: blur(0px);
+        opacity: 1;
+        border-color: var(--accent-cyan);
+        box-shadow: 0 20px 40px rgba(0, 240, 255, 0.2);
+        z-index: 10;
+    }
+    .timeline-card-3d img {
+        transition: filter 0.6s ease;
+        filter: brightness(0.5);
+    }
+    .timeline-card-3d.active img {
+        filter: brightness(1.1);
+    }
+    @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-50% - 20px)); }
+    }
+    .animate-scroll {
+        animation: scroll 40s linear infinite;
+    }
+    .paused {
+        animation-play-state: paused !important;
+    }
+</style>
+</head>
+<body class="font-body-lg text-body-lg">
+<div class="digital-bg"></div>
+<header class="fixed top-0 w-full z-50 bg-[#0e0e0e]/80 backdrop-blur-md border-b border-white/5">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<a href="index.html" class="font-bold tracking-tighter text-on-surface glitch-logo font-headline-lg text-[48px] leading-[1] py-1">AXIOMA-M</a>
+<nav class="hidden md:flex items-center gap-12">
+<a class="font-label-caps text-[13px] text-on-surface hover:text-primary transition-colors duration-300" href="index.html">Исследования</a>
+<a class="font-label-caps text-[13px] text-on-surface hover:text-primary transition-colors duration-300" href="departments.html">Кафедры</a>
+<a class="font-label-caps text-[13px] text-[#00f0ff] relative flex flex-col items-center gap-1" href="archive.html">
+                Архивы
+                <span class="w-1.5 h-1.5 bg-[#00f0ff] rounded-full shadow-[0_0_8px_#00f0ff]"></span>
+</a>
+<a class="font-label-caps text-[13px] text-on-surface hover:text-primary transition-colors duration-300" href="admission.html">Поступление</a>
+</nav>
+<button class="chrome-button text-on-primary-fixed font-label-caps text-[13px] px-8 py-2 rounded-sm border border-white/20" onclick="window.location.href='admission.html'">
+            Подключить узел
+        </button>
+</div>
+</header>
+<main class="pt-40 pb-40 overflow-x-hidden">
+<section class="px-margin-desktop max-w-container-max mx-auto mb-40 text-center">
+<span class="font-label-caps text-label-caps text-primary tracking-widest mb-4 block uppercase">НЕЙРОННЫЕ ГРАНИЦЫ И ИСТОРИЧЕСКИЕ ДАННЫЕ</span>
+<h1 class="font-display-hero text-display-hero chrome-text mb-8" style="font-family: 'Playfair Display', serif; font-size: 160px; font-weight: 900; letter-spacing: -0.02em;">Архивы</h1>
+<p class="max-w-2xl mx-auto text-on-surface-variant">Исследование исторической траектории AXIOMA-M: от первоначальной синхронизации нейронных узлов до вершины глобальных академических исследований и робототехнической интеграции.</p>
+</section>
+<section class="px-margin-desktop max-w-container-max mx-auto mb-[160px]">
+<div class="grid grid-cols-1 md:grid-cols-12 items-center gap-gutter">
+<div class="md:col-span-6 space-y-6">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[1px] bg-primary"></span>
+<h2 class="font-headline-md text-headline-md text-primary uppercase">НАШИ НАГРАДЫ И ДОСТИЖЕНИЯ</h2>
+</div>
+<p class="text-on-surface leading-relaxed text-lg">
+                    «Университет AXIOMA-M ежегодно подтверждает статус лидера в сфере высшего образования. В текущем году наш вуз удостоился высшей государственной награды за вклад в развитие науки и подготовку востребованных специалистов. Торжественная церемония вручения главного кубка за научно-исследовательскую деятельность стала подтверждением высокого профессионализма всего коллектива».
+                </p>
+<div class="pt-4">
+<button class="border border-outline px-8 py-3 font-label-caps text-label-caps hover:bg-primary/5 transition-colors">ПОСМОТРЕТЬ СЕРТИФИКАТЫ</button>
+</div>
+</div>
+<div class="md:col-span-6 relative">
+<div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full"></div>
+<div class="glass-card p-2 relative">
+<img alt="Awards Ceremony" class="w-full aspect-[1.79] object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArn-05-XpKRG4OjVXSNeMsDBLqo9Qw9cY3ZW-yR_BpMd-7B5HsUNkZoO2RMBNPFq0NXhh4dY7domlfm6jeIJhBp-bn1Kh0c1MAMGc83w4ehHg0ScQKoRPJ1ZwnCoxAx7Fgl94f44g3kk11fkZLAb1gdbOtPp3FpIn7xeNSBK0nfVLM0SQNt8r8RadSmUmcfYael0hMzVr9wnDdtny1WvgwZ-jJcp_cYVBhEPFGS-RFGns-LCvsDkjMFwszSOA_LevfzKSqHNrrWrA"/>
+</div>
+</div>
+</div>
+</section>
+<div class="px-margin-desktop max-w-container-max mx-auto mb-[160px]">
+<div class="neon-divider"></div>
+</div>
+<section class="px-margin-desktop max-w-container-max mx-auto mb-[160px]">
+<div class="grid grid-cols-1 md:grid-cols-12 items-center gap-gutter">
+<div class="md:col-span-6 order-2 md:order-1 relative">
+<div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full"></div>
+<div class="glass-card p-2 relative">
+<img alt="Robotics Lab" class="w-full aspect-[1.79] object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAam1JsxXJDPHR3pIX310Cd2y0mCqsqw_L7SZKNyj3eeimm8_rqO3CemrtUlyGmZNY-jxwmMPx1Wet2-5Mj9ZDdcJ0z10ayaVEAWV2lQK_uqIBMzFaUA7KzJvkl7bb2NZoWYZo9Qlg3TgXdtMnRoOo_8Uj3w6SZTxzoFIMD-gJuaqpKqyIejT6do9MQmIzCHNR_y7Ec_kk76Vdy3Na_A0KDOu7UmF1VXUU7LcSZSelXFLeZKUfXSPNjo8g6E3fB01vFEeE60OhXrtw"/>
+</div>
+</div>
+<div class="md:col-span-6 order-1 md:order-2 space-y-6 md:pl-12">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[1px] bg-primary"></span>
+<h2 class="font-headline-md text-headline-md text-primary uppercase">ДОСТИЖЕНИЯ В РОБОТОТЕХНИКЕ</h2>
+</div>
+<p class="text-on-surface leading-relaxed text-lg">
+                    «Инновационная лаборатория робототехники AXIOMA-M признана одной из лучших в стране. Наши студенты и преподаватели разрабатывают автономные роботизированные системы, которые занимают первые места на международных технологических выставках. На базе вуза успешно функционирует полигон для испытаний антропоморфных роботов и беспилотного транспорта».
+                </p>
+</div>
+</div>
+</section>
+<div class="px-margin-desktop max-w-container-max mx-auto mb-[160px]">
+<div class="neon-divider opacity-40"></div>
+</div>
+<section class="px-margin-desktop max-w-container-max mx-auto mb-[160px]">
+<div class="grid grid-cols-1 md:grid-cols-12 items-center gap-gutter">
+<div class="md:col-span-6 space-y-6">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[1px] bg-primary"></span>
+<h2 class="font-headline-md text-headline-md text-primary uppercase">МЕЖДУНАРОДНЫЕ ГРАНТЫ</h2>
+</div>
+<p class="text-on-surface leading-relaxed text-lg">
+                    «Ученые AXIOMA-M активно сотрудничают с мировыми исследовательскими центрами. За последние три года университет выиграл пять крупных международных грантов на разработку систем искусственного интеллекта и экологического мониторинга. Наши архивы хранят десятки патентов на изобретения, которые уже внедряются в реальный сектор экономики».
+                </p>
+</div>
+<div class="md:col-span-6 relative">
+<div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full"></div>
+<div class="glass-card p-2 relative">
+<img alt="Research Lab" class="w-full aspect-[1.79] object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgol3LFCJB6gZ6ZEtph3BmdmH3u4tgHW3rd0fH6S_1Oq0dGs-9kacRUZIAAFjQDFBXOfZ673I46Z57ksuTnq3SEYz5RK6oFF6viIC2Xu6DnaAQbBAhouSLcU4Apt-igI9d-d5SEftEg5wUP3jV1pOXpToTmT5Y7rAQLmaA-hfSbXpeNL2AuygAutdTl6FpijtUzjfZM9TDa4GIYu25DHHteKUV6kQCqt1TA6PDrdC3J4GmJu-DWmSFqFjKoHidfaz4LsP5x_0BPqs"/>
+</div>
+</div>
+</div>
+</section>
+<div class="px-margin-desktop max-w-container-max mx-auto mb-[160px]">
+<div class="neon-divider"></div>
+</div>
+<section class="px-margin-desktop max-w-container-max mx-auto mb-[160px]">
+<div class="grid grid-cols-1 md:grid-cols-12 items-center gap-gutter">
+<div class="md:col-span-6 order-2 md:order-1 relative">
+<div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full"></div>
+<div class="glass-card p-2 relative">
+<img alt="Graduates in Office" class="w-full aspect-[1.79] object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZEa2kGJ1uvlL9ShOwYgu_V0VKI4erRdi3WUMOqUOF4ftmEvTmnlIThYH7oHN3PMpKrSXhH1zGpXoUVwYCbKZyNc4KXDmv5PnifRFTYdTgI4mlad8eIltZj83zKsfORlWKILOw_9d7APDBon-qBbOfOBGuhqn2nudhhfI5yEYQZA_tO3AQcKyuY6jQ7Iw5rbCotucGWg9KMBZ3f3dlxfWygpvcXe2whEe2ZZzBpbCsFoQfmgYkzlr61SWA2L1kKo8H8Fxpbu4Qcx8"/>
+</div>
+</div>
+<div class="md:col-span-6 order-1 md:order-2 space-y-6 md:pl-12">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[1px] bg-primary"></span>
+<h2 class="font-headline-md text-headline-md text-primary uppercase">ИСТОРИИ УСПЕХА</h2>
+</div>
+<p class="text-on-surface leading-relaxed text-lg">
+                    «Главная гордость архива AXIOMA-M — успехи наших студентов после выпуска. Более 85% выпускников получают предложения от ведущих технологических и финансовых корпораций еще до защиты диплома. В этом блоке собраны исторические фотографии знаковых выпусков, историй создания первых стартапов прямо в стенах университетского кампуса».
+                </p>
+</div>
+</div>
+</section>
+<div class="px-margin-desktop max-w-container-max mx-auto mb-[160px]">
+<div class="neon-divider opacity-40"></div>
+</div>
+<section class="px-margin-desktop max-w-container-max mx-auto mb-[160px]">
+<div class="grid grid-cols-1 md:grid-cols-12 items-center gap-gutter">
+<div class="md:col-span-6 space-y-6">
+<div class="flex items-center gap-4">
+<span class="w-12 h-[1px] bg-primary"></span>
+<h2 class="font-headline-md text-headline-md text-primary uppercase">СПОРТИВНАЯ СЛАВА</h2>
+</div>
+<p class="text-on-surface leading-relaxed text-lg">
+                    «Архив побед AXIOMA-M включает не только научные, но и громкие спортивные достижения. Сборная университета регулярно занимает призовые места в студенческих лигах по баскетболу, футболу и шахматам. Творческие студии вуза ежегодно становятся лауреатами всероссийских фестивалей, формируя яркую и насыщенную внеучебную жизнь».
+                </p>
+<div class="pt-4">
+<a class="flex items-center gap-2 text-primary font-label-caps text-label-caps group" href="archive.html">ИЗУЧИТЬ КУЛЬТУРНЫЕ АРХИВЫ <span class="material-symbols-outlined transition-transform group-hover:translate-x-2">arrow_forward</span></a>
+</div>
+</div>
+<div class="md:col-span-6 relative">
+<div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full"></div>
+<div class="glass-card p-2 relative">
+<img alt="Sports Victory" class="w-full aspect-[1.79] object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy9H3paBRxfOji19CTZow9zyX9k55T845nZMzbytEyCbUV-ElgdB-_6_osYouW_I9_c7Els1qyVUL4vEP_ocuk5EKIDePcEn5Q0F9Zl__Of2Rqhk3Hp-VzTdBjUv_FKUKe7fIhIDG6m0cDJ8f-2crVxPVNcqePvV9Ucj77geTwNujNF7BE-yBsVqrzejpkQJ0sRwOgOmmrmqlMgwfb7qfpNcRAn4BCYIYso-Msr5TVsEYuia1FocmgnpyukTXfX7yKSaUIFq1dRQg"/>
+</div>
+</div>
+</div>
+</section>
+<section class="py-20 relative bg-surface overflow-hidden" id="university-timeline">
+<div class="max-w-container-max mx-auto px-margin-desktop mb-20 text-center">
+<h2 class="font-headline-lg text-headline-lg chrome-text uppercase tracking-[0.2em]">История развития AXIOMA-M</h2>
+</div>
+<div id="timeline-viewport">
+<div class="animate-scroll" id="timeline-track">
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-[#0e0e0e] border-t border-white/5 w-full py-16">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-y-10 items-center">
+<div class="md:col-span-3">
+<div class="font-headline-md text-headline-md text-on-surface font-bold tracking-tighter glitch-logo">AXIOMA-M</div>
+</div>
+<div class="md:col-span-6 flex flex-col gap-6 items-center">
+<div class="flex gap-10">
+<a class="text-[14px] text-on-surface hover:text-primary transition-colors" href="#">Протокол конфиденциальности</a>
+<a class="text-[14px] text-on-surface hover:text-primary transition-colors" href="#">Условия исследований</a>
+</div>
+<div class="flex gap-10">
+<a class="text-[14px] text-on-surface hover:text-primary transition-colors" href="#">Нейроэтика</a>
+<a class="text-[14px] text-on-surface hover:text-primary transition-colors" href="#">Поддержка</a>
+</div>
+</div>
+<div class="md:col-span-3 text-right text-[12px] leading-tight">
+<p class="text-on-surface uppercase tracking-wider">
+                    STARDATE 2026 УНИВЕРСИТЕТ ИИ AXIOMA-M. <br/>
+<span class="text-[#00f0ff] drop-shadow-[0_0_8px_#00f0ff]">НЕЙРОННЫЕ ГРАНИЦЫ ЗАЩИЩЕНЫ.</span>
+</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    const timelineData = [
+        { date: '01.08.2018', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCSS_8VCp5_EgLHv2CSEDzMw00uIuORu4yyMVV0H7LiDBbbme77LO4zbinpGFEKKQu5zsd5lUVGwxe6wtze6BN_bLkXO7rdJhKHqBl9J6qcxdyqk_4yQZLHTX1RLewRBgXoOFLXuDscjxoQhvpzmDACKSKUuyLVOraU-yzYHVBwxTikgt1nH4mBtIQB14xA9jtaKPaIqv8XHDBBZsSBbGl9NwXzN2T7c6GuaMAJ93WgZ4HgnI7K2kVr3f97t5n8_MzBVvW0HakwMFg', text: 'Официальное открытие и регистрация AXIOMA-M.' },
+        { date: '15.01.2019', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCdGG2uhbhumJTnwyk-MaHLh-z6SdT_4XS3ro2u8YWQg8uVquDBafiW7CbAVKCnE9zv-HwQDrHTmyXYFDoirE4Z8b1Q-XLhCaXvhcjz5Tc_PwaPmfapF3dX7vt2qM3tTiUJ8JQP-je1SfsLeDZHWjGyahk48tUVx5bDXafcnuktpnAh4o5eu9Jdk5uQBsXR8rL0FQHF5lkHNUntJmNYhhGJlKKM52aQ_OapuhF8wbucqbEgwZbUpvP68nVEsTMNXHAZv38v9LfB8pI', text: 'Утверждение стратегии развития вуза.' },
+        { date: '01.09.2019', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA_LmrbgGut2FyySTLwW65iTMiEXGZbhHws0Y9vpYjkCnuHapvlFmIfbAB1U3iLy5-zhv9mfndgE22if6ZFrnrnxdwCqgFwaw_fZ-L7hUP0yhOOSy-pyic0XnwDJbLJtRzGY7pVTNCJT7goDveapNvDX8KswXmLiSsr_7sj1l1Mn755qFYXaSu5sceOlzD3ZscG4lrr6Ul1Q_zMRIuPZRP1XSAJZCx8kI1nKwFM3nVzM0bE3-YmIhpsvqT8UJDOpV7SSaH8kbJzJO4', text: 'Первый набор студентов в новом кампусе.' },
+        { date: '12.04.2020', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCoM0ByJHkGoAiUM177yRBVeULJ0Me1O7zrHznePIq7YNalMhUfjY0bs9noeU2L6nbBjXSr3pt-nTIycN8H_eLokF9htjhNW1J4AecQ_AWQcF-80RsqGKp9W-9umvd3YWfpaiLWcScQq7CtxWHHQ1Kc46GOfJk8sVVCjcVw_eFnIEkxWLe0AnqGk8fB0glJ9iGM4zA_vFwl18olvLeYjlOa2nVCo3RN2ufpk_ByTV2DCjQlHXBELVeE_50B4NRg3SE5q7SE_T0kCXU', text: 'Запуск цифровой экосистемы обучения.' },
+        { date: '10.11.2021', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3nZQYzHZflVDUMNjlf_KD3YeWhDT-vSbEcsZx-Y4dTVrhNbZP1OwOaBeD9SLFrXz4Dbexi7K1h0G84U1zaml53J3fsxGkYBFmQoZUXoZp3zIn1KWo6gWGPiNVWTIfcD2sIpOgnwYvst4-Nio9YR_Ch3WbfZLXaCs3FrIaiWX6Yw_GTG7yhSraOhTwbFBNBYreoRVgzH3wq2x6V4lH02WV89MAnIbCLeA_ZAZwIpYWVRM9rNnKJMuYEB6r0fw9alTcZQKq82tPYs4', text: 'Открытие центра антропоморфных систем.' },
+        { date: '25.05.2022', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCjda5SpLBRD4XXYLGuYdqY59E45huAT3p8oOYtiyJr0tTKsOSpDiLX_pnuGy2NoC7ryyvIcD2tIc-8LWGDMRPmhNEfU85cl5PGskpkY27GcNXIUtCdntTUkBZe2D4OhngVlfd8wggll76ye9hITjPemgygE_zxyGB-12-LgcmvyE4H2og_K_WQaa1ju8gFlNJb5mZARPBJtbtmwz7lmUBB75kamDpHyXMCMVOdxiPnxrZGOXyBIovXXZgxwJ8v230n0k_0vbgQdcs', text: 'Международный симпозиум по ИИ.' },
+        { date: '30.06.2023', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA2919UbcD1XdPnU7jPM4fTncq4JrqJuBLbc5vg1iGGnfUUisVBoMM746ewXtGp5g9vN4CcQDGJ6toisX424Hwz7NyhXNLzeCoFgSoaovlBUh2KFP79FNMSIFXCdE8-7OyD3CD85FYWo5pb7z80v15_REb_iWAkdWRsOzFagtDmJRrUzmZEGgXnWyvwU_sN_LNooEMlOPMgO0FRg1JzHSBME9DAJnGDhIgPj0Yc_nPGqtB0sZUCSTlTLXfWpqAfjA2D-j507xke7vI', text: 'Первый выпуск магистров университета.' },
+        { date: '14.02.2024', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDf20yMYHDRn-W6M8hKMaTpivjxBftXCEUd_6cNzazf9c8AU63hkNtjycs9qhWLoVyVq5nM-caOSv2Mjr874-UfqeDAFN9qqfZbWQrfVla1uLzBPbTIZ3Wx1I0cR3PgfnoVXPKLxiqJVEEK7GUAC0fXd0sxCJ1640KIE4v2thFQOlCcEItbu6qdP50OC0setQFxHzw3mBW0wQt06cAy6YFB6WU_EKFFw-j6SETcc2VXQbwXxcbx7iEMjIyT4R-2GwILlUHaWC3bUGA', text: 'Старт студенческого бизнес-инкубатора.' },
+        { date: '19.10.2024', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBrTxCuf7bIF_z9AREVb_qPtsg0ef1yd1bnIWwd_5icepEA9g6oNYmzdS16Qa6PdI3U7XFhtT2r_DqKQwib8lef2BwtcfHdR4-OUZPx8icklewZzAgzRovfX--yK1_Rv51syrcgIRvzygANpXWTzDL27a7ZhxXvjkWsbWu403KeZfSXQCicRlHI60QnPAP4xiQbOCe_gQEf7Hp1BJSs1SOhgWhE70oYSJ5OSdmh8GGRC1jchn9iLTtnJdAbuxJ__xw8HxnWq4p6X0k', text: 'Запуск суперкомпьютерного кластера.' },
+        { date: '05.03.2025', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBuUFixoBTuELULRgR9Eyp5gwooCup0i-MFkRw7C91bx8NATfJEIGWVQq_dTxYHmo4h1aJlcChHSH3yMLG9NZc6VZBAxsvZMV2XtbxYKMk8C_3FBqibOBN5FtwZeu2MJk_XebLka0m2LTHkQj1C3kLJxu3xoSNUTZ_OFEj6mGv20n37cfr5iOB9DO7oX-bk0CDRZEni4zOPkxs37S4o1RyMZO2zrUgZo6bPqxojRkicu7HWFeJ_4qX0--m5D8mFR_SI273PTOVf8rY', text: 'Начало строительства второго корпуса.' },
+        { date: '01.01.2026', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD2Ll4fTbch_AHsJ79AJkIL_kEDk3paNYbFQIU54Kv0VNO9Q8uUUHDjftf1IMdBm1n36z-Y0DakNL3Mga8okgv3pE2yd6XB_qqSdpg_qA16hCoJ9u38iOV57JMu4D1_yclFuSX_FvkTyGrnOuUyWRdaSAzTetYT_6PeUSdt0TfmIVZCOlLa0XVKO3Hw2jIE8K-ZmbibHBQvhaRxLHCwai5J8uLW9u4IatWVPN7vk-gKQJe98psnYb6CehmHoULZ0oXJy1B3t8Si8Q0', text: 'Вхождение в топ мировых научных рейтингов.' }
+    ];
+
+    const track = document.getElementById('timeline-track');
+    
+    function createCard(item) {
+        return `
+            <div class="timeline-card-3d">
+                <div class="h-48 overflow-hidden">
+                    <img alt="${item.date}" class="w-full h-full object-cover grayscale opacity-60" src="${item.img}"/>
+                </div>
+                <div class="p-6 space-y-2">
+                    <div class="text-primary font-label-caps text-sm tracking-[0.2em]">${item.date}</div>
+                    <p class="text-body-sm text-on-surface leading-snug">${item.text}</p>
+                </div>
+            </div>
+        `;
+    }
+
+    function initTimeline() {
+        if (!track) return;
+        const content = timelineData.map(createCard).join('');
+        track.innerHTML = content + content;
+
+        const options = {
+            root: document.getElementById('timeline-viewport'),
+            threshold: 0.8
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, options);
+
+        const cards = document.querySelectorAll('.timeline-card-3d');
+        cards.forEach(card => {
+            observer.observe(card);
+            
+            card.addEventListener('mouseenter', () => {
+                track.classList.add('paused');
+            });
+            card.addEventListener('mouseleave', () => {
+                track.classList.remove('paused');
+            });
+        });
+    }
+
+    window.addEventListener('load', initTimeline);
+</script>
+</body></html>

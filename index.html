@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Geist:wght@100;300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #050505;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(255, 255, 255, 0.15);
+        }
+        .chrome-button {
+            background: linear-gradient(135deg, #e5e7eb 0%, #9ca3af 25%, #f9fafb 50%, #9ca3af 75%, #4b5563 100%);
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+                0 4px 6px -1px rgba(0, 0, 0, 0.5),
+                0 0 15px rgba(0, 240, 255, 0.2);
+            border: 0.5px solid #ffffff;
+            position: relative;
+            overflow: hidden;
+            animation: pulse-glow-subtle 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .chrome-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg);
+            transition: 0.8s;
+        }
+        .chrome-button:hover::after {
+            left: 150%;
+        }
+        .neon-glow-cyan {
+            border-color: #00F0FF;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2), inset 0 0 5px rgba(0, 240, 255, 0.1);
+            animation: pulse-border-cyan 5s infinite alternate;
+        }
+        .chrome-border {
+            border: 0.5px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+        }
+        .chrome-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, #fff 0%, transparent 50%, #888 100%);
+            z-index: -1;
+            border-radius: inherit;
+            opacity: 0.2;
+        }
+        .radial-bg {
+            background: radial-gradient(circle at center, rgba(0, 240, 255, 0.05) 0%, transparent 70%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-glow-white {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2), 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+        .text-glow-cyan {
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+            animation: pulse-text-cyan 6s infinite alternate;
+        }
+        .nav-link-glow:hover {
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+        }
+        .divider-glow {
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+        .logo-chrome {
+            filter: grayscale(100%) brightness(1.2) contrast(1.1);
+            transition: all 0.4s ease;
+        }
+        .logo-chrome:hover {
+            filter: grayscale(0%) brightness(1.1) drop-shadow(0 0 12px rgba(0, 240, 255, 0.4));
+            animation: shimmer 1.5s infinite linear;
+        }
+        
+        @keyframes flow {
+            0% { stroke-dashoffset: 48; }
+            100% { stroke-dashoffset: 0; }
+        }
+        .animate-flow {
+            stroke-dasharray: 8 16;
+            animation: flow 3s linear infinite;
+        }
+        
+        @keyframes pulse-glow-subtle {
+            0%, 100% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.1); }
+            50% { box-shadow: 0 0 20px rgba(0, 240, 255, 0.2); }
+        }
+        
+        @keyframes pulse-border-cyan {
+            0% { border-color: rgba(0, 240, 255, 0.2); box-shadow: 0 0 10px rgba(0, 240, 255, 0.1); }
+            100% { border-color: rgba(0, 240, 255, 0.4); box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); }
+        }
+
+        @keyframes pulse-text-cyan {
+            0% { opacity: 0.7; text-shadow: 0 0 5px rgba(0, 240, 255, 0.2); }
+            100% { opacity: 0.9; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
+        }
+
+        @keyframes shimmer {
+            0% { filter: brightness(1.1); }
+            50% { filter: brightness(1.3); }
+            100% { filter: brightness(1.1); }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-0.5px, 0.5px); }
+            40% { transform: translate(-0.5px, -0.5px); }
+            60% { transform: translate(0.5px, 0.5px); }
+            80% { transform: translate(0.5px, -0.5px); }
+            100% { transform: translate(0); }
+        }
+        
+        .hover-glitch:hover {
+            animation: glitch 0.5s cubic-bezier(.25,.46,.45,.94) both;
+            color: #00F0FF;
+        }
+
+        .digital-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        @keyframes starfield {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-1000px); }
+        }
+        .stars-overlay {
+            background-image: radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+                              radial-gradient(1.5px 1.5px at 40px 70px, #00F0FF, rgba(0,0,0,0)),
+                              radial-gradient(1px 1px at 50px 160px, #fff, rgba(0,0,0,0)),
+                              radial-gradient(2px 2px at 90px 40px, #00F0FF, rgba(0,0,0,0));
+            background-size: 200px 200px;
+            animation: starfield 150s linear infinite;
+            width: 100%;
+            height: 200%;
+        }
+
+        .data-point {
+            offset-path: path(var(--path));
+            animation: move-point 6s linear infinite;
+            fill: #00F0FF;
+            filter: drop-shadow(0 0 3px #00F0FF);
+        }
+        @keyframes move-point {
+            0% { offset-distance: 0%; opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { offset-distance: 100%; opacity: 0; }
+        }
+    
+        @keyframes flying-symbol {
+            0% { offset-distance: 0%; opacity: 0; }
+            5% { opacity: 0.8; }
+            95% { opacity: 0.8; }
+            100% { offset-distance: 100%; opacity: 0; }
+        }
+        .flying-symbol {
+            offset-path: path(var(--path));
+            animation: flying-symbol var(--duration, 8s) linear infinite;
+            animation-delay: var(--delay, 0s);
+            fill: #00F0FF;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8px;
+            filter: drop-shadow(0 0 4px #00F0FF);
+            pointer-events: none;
+            user-select: none;
+            opacity: 0;
+        }
+        .material-symbol-packet {
+            font-family: 'Material Symbols Outlined';
+            font-size: 10px;
+        }
+    
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-container": "#484949",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed-dim": "#00dbe9",
+                        "surface": "#131313",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#353535",
+                        "surface-container-highest": "#353535",
+                        "on-primary-container": "#006970",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary": "#2f3131",
+                        "secondary-fixed": "#e3e2e2",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "primary-fixed": "#7df4ff",
+                        "on-surface-variant": "#b9cacb",
+                        "secondary": "#c6c6c6",
+                        "tertiary": "#f9f5f5",
+                        "on-primary-fixed-variant": "#004f54",
+                        "inverse-on-surface": "#313030",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface-bright": "#393939",
+                        "background": "#131313",
+                        "outline-variant": "#3b494b",
+                        "on-background": "#e5e2e1",
+                        "on-primary": "#00363a",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "tertiary-container": "#dcd9d8",
+                        "inverse-primary": "#006970",
+                        "surface-container": "#20201f",
+                        "on-primary-fixed": "#002022",
+                        "tertiary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary": "#dbfcff",
+                        "surface-tint": "#00dbe9",
+                        "surface-dim": "#131313",
+                        "on-secondary-fixed-variant": "#464747",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "outline": "#849495",
+                        "on-tertiary": "#313030",
+                        "on-secondary-container": "#b8b8b8",
+                        "on-tertiary-container": "#605e5e",
+                        "primary-container": "#00f0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "container-max": "1440px",
+                        "margin-desktop": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "body-lg": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "headline-md": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "display-hero": ["Space Grotesk"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["40px", {"lineHeight": "120%", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "160%", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "150%", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "130%", "fontWeight": "500"}],
+                        "headline-lg": ["64px", {"lineHeight": "120%", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-hero": ["120px", {"lineHeight": "110%", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "100%", "letterSpacing": "0.1em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<script>
+ // Инициализация базы данных (Строго один раз для главной страницы)
+ const supabase = window.supabase.createClient('https://knwqhzuegzjbqqvrfggo.supabase.co', 'sb_publishable_lwr9wFjKInl2-xmgNWLtGw_kkgIqSHo');
+ let timerSeconds = 300;
+
+ // Функция загрузки данных рейтинга в таблицу на главной
+ async function updateTableData() {
+ try {
+ const { data, error } = await supabase
+ .from('applicants')
+ .select('snils_or_id, full_name, total_ege_score')
+ .order('total_ege_score', { ascending: false })
+ .limit(100);
+ 
+ if (error) throw error;
+ 
+ const container = document.getElementById('rankingTableBody');
+ if (!container) return;
+ 
+ if (!data || data.length === 0) {
+ container.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-white/40">Нет данных</td></tr>';
+ return;
+ }
+ 
+ let rows = '';
+ data.forEach((applicant, index) => {
+ const avgScore = (applicant.total_ege_score / 3).toFixed(2);
+ rows += '<tr class="row-glow transition-colors" style="border-bottom: 1px solid rgba(255,255,255,0.05);">' +
+ '<td class="px-6 py-4 font-label-caps text-[#00E5FF] font-bold">' + String(index + 1).padStart(3, '0') + '</td>' +
+ '<td class="px-6 py-4 font-label-caps text-xs text-white/60">' + (applicant.snils_or_id || '—') + '</td>' +
+ '<td class="px-6 py-4 text-white font-medium">' + applicant.full_name + '</td>' +
+ '<td class="px-6 py-4 text-center text-white/80">' + applicant.total_ege_score + '</td>' +
+ '<td class="px-6 py-4 font-label-caps text-[#00E5FF] text-right">' + avgScore + '</td></tr>';
+ });
+ container.innerHTML = rows;
+ 
+ } catch (err) {
+ console.error('Ошибка загрузки данных на главной:', err);
+ }
+ }
+
+ // Функция загрузки реальной статистики потока
+ async function updateStats() {
+ try {
+ // Получаем реальное количество абитуриентов
+ const { count, error: countError } = await supabase
+ .from('applicants')
+ .select('*', { count: 'exact', head: true });
+
+ if (countError) throw countError;
+
+ // Получаем все баллы для расчета среднего значения
+ const { data, error: dataError } = await supabase
+ .from('applicants')
+ .select('total_ege_score');
+
+ if (dataError) throw dataError;
+
+ const totalCount = count || 0;
+ let avgScoreAll = '0.0';
+
+ if (totalCount > 0 && data) {
+ const sumScores = data.reduce((sum, a) => sum + (a.total_ege_score || 0), 0);
+ avgScoreAll = (sumScores / 3 / totalCount).toFixed(1);
+ }
+
+ // Обновляем элементы на экране
+ if (document.getElementById('totalApplicants')) document.getElementById('totalApplicants').textContent = totalCount.toLocaleString();
+ if (document.getElementById('avgScore')) document.getElementById('avgScore').textContent = avgScoreAll;
+
+ } catch (err) {
+ console.error('Ошибка загрузки статистики на главной:', err);
+ }
+ }
+
+ // Логика таймера обновления
+ function updateTimer() {
+ const minutes = Math.floor(timerSeconds / 60);
+ const seconds = timerSeconds % 60;
+ const timerDisplay = document.getElementById('timerDisplay');
+ 
+ if (timerDisplay) {
+ timerDisplay.textContent = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+ }
+ 
+ if (timerSeconds <= 0) {
+ timerSeconds = 300;
+ updateTableData();
+ updateStats();
+ } else {
+ timerSeconds--;
+ }
+ }
+
+ // Запуск процессов при загрузке главной страницы
+ document.addEventListener('DOMContentLoaded', function() {
+ updateTableData();
+ updateStats();
+ setInterval(updateTimer, 1000);
+ });
+</script>
+
+
+</head>
+<body class="bg-[#050505] selection:bg-primary-container selection:text-on-primary-container">
+<div class="digital-background">
+<div class="stars-overlay"></div>
+</div>
+<nav class="fixed top-0 w-full z-50 bg-surface/30 backdrop-blur-xl border-b border-white/10">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<a href="index.html" class="font-headline-md text-headline-md font-bold tracking-tighter text-white text-glow-white hover-glitch transition-all cursor-default">AXIOMA-M</a>
+<div class="hidden md:flex gap-10">
+<a class="font-label-caps text-label-caps text-[#00F0FF] relative after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:bg-[#00F0FF] after:rounded-full hover:text-[#00F0FF] transition-colors duration-300 drop-shadow-[0_0_8px_rgba(0,240,255,0.6)] nav-link-glow" href="index.html">Исследования</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-[#00F0FF] transition-colors duration-300 nav-link-glow" href="departments.html">Кафедры</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-[#00F0FF] transition-colors duration-300 nav-link-glow" href="archive.html">Архивы</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-[#00F0FF] transition-colors duration-300 nav-link-glow" href="admission.html">Поступление</a>
+</div>
+<button class="chrome-button text-[#1a1c1c] px-6 py-2 font-label-caps text-label-caps scale-95 active:scale-90 transition-transform" onclick="window.location.href='admission.html'">Подключить узел</button>
+</div>
+</nav>
+<main class="relative">
+<section class="min-h-screen flex flex-col items-center justify-center pt-32 px-margin-mobile relative overflow-hidden radial-bg">
+<div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+<div class="w-[600px] h-[600px] rounded-full glass-card neon-glow-cyan border-[#00F0FF]/30 flex items-center justify-center">
+<div class="w-80 h-80 rounded-full bg-gradient-to-tr from-[#00F0FF]/20 to-transparent animate-pulse flex items-center justify-center">
+<div class="w-40 h-40 glass-card rounded-full border-white/40 shadow-[0_0_50px_rgba(0,240,255,0.1)]"></div>
+</div>
+</div>
+</div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[60%] w-full max-w-4xl opacity-30 pointer-events-none z-0">
+<svg class="w-full h-auto drop-shadow-[0_0_35px_rgba(0,240,255,0.6)]" fill="none" viewbox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="kremlin-hologram-gradient" x1="0%" x2="100%" y1="0%">
+<stop offset="0%" stop-color="#00F0FF" stop-opacity="0.4"></stop>
+<stop offset="50%" stop-color="#ffffff" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#00F0FF" stop-opacity="0.4"></stop>
+</lineargradient>
+<filter id="glow">
+<fegaussianblur result="coloredBlur" stddeviation="1.5"></fegaussianblur>
+<femerge>
+<femergenode in="coloredBlur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+</defs>
+<path d="M50 350 H950" filter="url(#glow)" opacity="0.6" stroke="#00F0FF" stroke-width="0.8"></path>
+<g filter="url(#glow)" opacity="0.9" stroke="url(#kremlin-hologram-gradient)" stroke-width="0.7">
+<rect fill="none" height="150" width="80" x="220" y="200"></rect>
+<path d="M220 200 L260 120 L300 200 Z" fill="none"></path>
+<path d="M240 120 V100 M280 120 V100 M260 120 V60 L250 40 L260 20 L270 40 L260 60" fill="none" id="kremlin-spire"></path>
+<circle cx="260" cy="170" fill="none" r="15"></circle>
+<path d="M260 155 V185 M245 170 H275" fill="none" opacity="0.5"></path>
+<circle class="data-point" r="1.5" style="--path: 'M260 120 V60 L250 40 L260 20 L270 40 L260 60'"></circle>
+</g>
+<g filter="url(#glow)" opacity="0.9" stroke="url(#kremlin-hologram-gradient)" stroke-width="0.7">
+<rect fill="none" height="130" width="60" x="550" y="220"></rect>
+<path d="M550 220 C550 180 610 180 610 220" fill="none"></path>
+<path d="M580 180 V120 L570 100 L580 80 L590 100 L580 120" fill="none"></path>
+<rect fill="none" height="90" width="50" x="490" y="260"></rect>
+<path d="M490 260 Q515 220 540 260" fill="none"></path>
+<rect fill="none" height="60" width="40" x="440" y="290"></rect>
+<path d="M440 290 Q460 260 480 290" fill="none"></path>
+<rect fill="none" height="90" width="50" x="620" y="260"></rect>
+<path d="M620 260 Q645 220 670 260" fill="none"></path>
+<rect fill="none" height="60" width="40" x="680" y="290"></rect>
+<path d="M680 290 Q700 260 720 290" fill="none"></path>
+<path class="animate-flow" d="M220 250 H300 M220 300 H300 M440 320 H720 M550 280 H610" opacity="0.4" stroke-dasharray="2 4"></path>
+<text class="flying-symbol" style="--path: 'M440 320 H720'; --duration: 12s; --delay: 1s;">0xDATA_STREAM_INIT</text>
+<text class="flying-symbol material-symbol-packet" style="--path: 'M440 320 H720'; --duration: 10s; --delay: 5s;">database</text>
+<text class="flying-symbol" style="--path: 'M550 280 H610'; --duration: 6s; --delay: 2s;">0x99</text>
+</g>
+</svg>
+</div>
+<div class="relative z-10 text-center space-y-8">
+<p class="font-label-caps text-label-caps text-[#00F0FF] tracking-[0.6em] mb-4 text-glow-cyan opacity-80">МОСКВА, РОССИЯ</p>
+<h1 class="font-display-hero text-display-hero text-white tracking-tighter text-glow-white uppercase hover-glitch transition-all cursor-default">AXIOMA-M</h1>
+<p class="font-label-caps text-label-caps text-[#00F0FF] tracking-[0.4em] uppercase text-glow-cyan">ОПРЕДЕЛЯЯ НЕЙРОННЫЕ ГРАНИЦЫ</p>
+<div class="pt-12">
+<span class="material-symbols-outlined text-[#00F0FF]/50 text-4xl animate-bounce drop-shadow-[0_0_10px_rgba(0,240,255,0.4)]">expand_more</span>
+</div>
+</div>
+</section>
+<section class="py-20 px-margin-desktop max-w-container-max mx-auto"><div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="glass-card chrome-border neon-glow-cyan p-10 flex flex-col items-center justify-center text-center transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,240,255,0.2)]">
+<div class="font-headline-lg text-headline-lg text-[#00F0FF] text-glow-cyan mb-2">98%</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant tracking-widest uppercase">Точность ИИ</div>
+</div>
+<div class="glass-card chrome-border neon-glow-cyan p-10 flex flex-col items-center justify-center text-center transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,240,255,0.2)]">
+<div class="font-headline-lg text-headline-lg text-[#00F0FF] text-glow-cyan mb-2">2</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant tracking-widest uppercase">года практики</div>
+</div>
+<div class="glass-card chrome-border neon-glow-cyan p-10 flex flex-col items-center justify-center text-center transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(0,240,255,0.2)]">
+<div class="font-headline-lg text-headline-lg text-[#00F0FF] text-glow-cyan mb-2">250+</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant tracking-widest uppercase">мировых преподавателей</div>
+</div>
+</div></section>
+<section class="py-40 px-margin-desktop max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-white mb-20 text-center text-glow-white hover-glitch inline-block w-full cursor-default">Популярные факультеты</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="glass-card p-8 group hover:neon-glow-cyan hover:border-[#00F0FF]/50 transition-all duration-500 flex flex-col h-full chrome-border hover:shadow-[0_0_30px_rgba(0,240,255,0.15)]">
+<div class="aspect-video mb-8 overflow-hidden border border-white/5 group-hover:border-[#00F0FF]/20 transition-colors">
+<img class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-700 group-hover:scale-110" data-alt="Масштабный кинематографический кадр светящегося синего интерфейса нейронной сети в темной высокотехнологичной лаборатории." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl_P7zNa-eNl_NdhfrvHW1jfTyTXZl-mBD4DPFY1VyuEt3HeaYYZuaErXcn1eOdjSMQbiMthg5ivr5T7s2j56zqGxPOTHj9at1OyAE7WkjBctpUFtOvS6XwENsviZyeK1v6C5f_20owXx269W03bF4GwW4Ux7a4K6pq7sHR2htiUpeZ0UQeqRkfLSRvnei-E6tj8gj3_55T_9xqNqfDKqlI_OMp43t7nd6hqfhaQGOdBmMvW9By5zudsQYjMYByXeWZaqpLVfvqHE"/>
+</div>
+<div class="font-label-caps text-label-caps text-[#00F0FF] mb-4 group-hover:text-glow-cyan">ФЕВРАЛЬ 2025</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 leading-tight group-hover:text-white transition-colors">Цифровая юриспруденция и кодинг</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-10 flex-grow">Подготовка экспертов на стыке права и технологий: от правового регулирования алгоритмов до разработки безопасного программного обеспечения.</p>
+<a class="font-label-caps text-label-caps text-[#00F0FF] flex items-center gap-2 group-hover:translate-x-2 transition-transform group-hover:text-glow-cyan" href="archive.html">
+                        ЧИТАТЬ АРХИВ <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="glass-card p-8 group hover:neon-glow-cyan hover:border-[#00F0FF]/50 transition-all duration-500 flex flex-col h-full chrome-border hover:shadow-[0_0_30px_rgba(0,240,255,0.15)]">
+<div class="aspect-video mb-8 overflow-hidden border border-white/5 group-hover:border-[#00F0FF]/20 transition-colors">
+<img class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-700 group-hover:scale-110" data-alt="Минималистичный 3D-рендеринг абстрактного ядра мозга ИИ, состоящего из жидкого металла и матового стекла." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqu7luNmY_D5817YufAAJtwZUm7YRoDU_HAJR1tjiUKMzSrmmfRp-1BzZevPuyPdh_HPJoD7yHK6ftQ8xivN7vJ56GgTZ5F5Oo68gvJTmo8mhMScVVGvwFJwgDwfYR7CVrBXoxVK7RWhqAfXrfDmqiOj6MJQMClO8rAOhpH1yUKgy6Qhzg8Bq3ao4YoEUODcXEPM0dT2yInG_goL7OXNK9plZBbDdAqcER765ZCn88mAej-C3g5MVxYC4sAD6nK9Kt8fOGbKvYZmU"/>
+</div>
+<div class="font-label-caps text-label-caps text-[#00F0FF] mb-4 group-hover:text-glow-cyan">ЯНВАРЬ 2025</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 leading-tight group-hover:text-white transition-colors">Искусственный интеллект в международном бизнесе</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-10 flex-grow">Масштабирование нейронных сетей для глобальных рынков, оптимизация бизнес-процессов и управление интеллектуальными корпоративными системами.</p>
+<a class="font-label-caps text-label-caps text-[#00F0FF] flex items-center gap-2 group-hover:translate-x-2 transition-transform group-hover:text-glow-cyan" href="archive.html">
+                        ЧИТАТЬ АРХИВ <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="glass-card p-8 group hover:neon-glow-cyan hover:border-[#00F0FF]/50 transition-all duration-500 flex flex-col h-full chrome-border hover:shadow-[0_0_30px_rgba(0,240,255,0.15)]">
+<div class="aspect-video mb-8 overflow-hidden border border-white/5 group-hover:border-[#00F0FF]/20 transition-colors">
+<img class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-700 group-hover:scale-110" data-alt="Вид со спутника на футуристический город ночью, пронизанный яркими потоками данных." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY6wrYJgKXmOdtZNJzSo_NmX0W-V3U_anHrPfz_mALhSl00qUDBKafolE5o0T1aAcgVfts_A8TQxIV0dGhwZ0-A4yknlYjUxPE_WO7_GjZFzT3lLWSeik9gMqZqZcKmAjknlaT9t1nX3oHDwGx8Jtuw_fsVT4tVRGo0b3N1Ouy9UPwzJhtQmv2SMfNAeJmeVSinYO7axVHcJOm8p2HXy6MO2GLfSISv5F-q5zpeDxP0BX1qXNTT3ovEmsN5u6B93YJk4QyjPtwCOU"/>
+</div>
+<div class="font-label-caps text-label-caps text-[#00F0FF] mb-4 group-hover:text-glow-cyan">ДЕКАБРЬ 2024</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 leading-tight group-hover:text-white transition-colors">Разработка моделей ИИ</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-10 flex-grow">Проектирование и обучение сложнейших нейронных архитектур, фундаментальные исследования в области машинного обучения и компьютерного зрения.</p>
+<a class="font-label-caps text-label-caps text-[#00F0FF] flex items-center gap-2 group-hover:translate-x-2 transition-transform group-hover:text-glow-cyan" href="archive.html">
+                        ЧИТАТЬ АРХИВ <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<section class="py-40 px-margin-desktop bg-[#000000] border-t border-white/10 relative overflow-hidden">
+<div class="max-w-container-max mx-auto relative z-10">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg text-white mb-4 text-glow-white hover-glitch inline-block cursor-default uppercase tracking-wider">РЕЙТИНГ АБИТУРИЕНТОВ</h2>
+<div class="h-px w-32 bg-[#00E5FF] mx-auto shadow-[0_0_10px_#00E5FF]"></div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="flex-grow lg:w-2/3 glass-card chrome-border p-1">
+<div class="overflow-y-auto max-h-[550px] custom-scrollbar">
+<style>
+            .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+            .custom-scrollbar::-webkit-scrollbar-track { background: #000; }
+            .custom-scrollbar::-webkit-scrollbar-thumb { background: #111; border-radius: 3px; border: 1px solid #00E5FF33; }
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #00E5FF; }
+            .row-glow:hover { background: rgba(0, 229, 255, 0.05); }
+          </style>
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 z-20 bg-black/90 backdrop-blur-md border-b border-[#00E5FF]/20">
+<tr>
+<th class="px-6 py-4 font-label-caps text-[10px] text-[#00E5FF] uppercase tracking-widest">Место</th>
+<th class="px-6 py-4 font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">ID / СНИЛС</th>
+<th class="px-6 py-4 font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">ФИО Абитуриента</th>
+<th class="px-6 py-4 font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest text-center">Сумма ЕГЭ</th>
+<th class="px-6 py-4 font-label-caps text-[10px] text-[#00E5FF] uppercase tracking-widest text-right">Средний балл</th>
+</tr>
+</thead>
+<tbody id="rankingTableBody" class="divide-y divide-white/5">
+<tr><td colspan="5" class="px-6 py-4 text-center text-on-surface-variant">Загрузка данных...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="lg:w-1/3 flex flex-col gap-6">
+<div class="glass-card chrome-border p-8 flex flex-col items-center text-center space-y-6">
+<div class="space-y-2">
+<p class="font-label-caps text-[10px] text-[#00E5FF] tracking-[0.2em] uppercase">СЛЕДУЮЩЕЕ ОБНОВЛЕНИЕ</p>
+<div id="timerDisplay" class="font-display-hero text-5xl text-white text-glow-white tabular-nums">05:00</div>
+</div>
+<div class="p-4 bg-white/5 border border-white/10 rounded-lg">
+<p class="font-body-sm text-on-surface-variant leading-relaxed">
+              Данные рейтинга синхронизируются с центральным ядром AXIOMA-M в режиме реального времени. Полный пересчет позиций происходит каждые 5 минут.
+            </p>
+</div>
+<div class="flex items-center gap-3 px-6 py-3 border border-[#00E5FF]/30 rounded-full bg-[#00E5FF]/5">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00E5FF] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-[#00E5FF]"></span>
+</span>
+<span class="font-label-caps text-xs text-[#00E5FF] tracking-widest font-bold">СЕРВЕР: СВЯЗЬ АКТИВНА</span>
+</div>
+</div>
+<div class="glass-card chrome-border p-8">
+<h4 class="font-label-caps text-xs text-white mb-4 tracking-widest">СТАТИСТИКА ПОТОКА</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-white/5 pb-2">
+<span class="text-on-surface-variant text-sm">Всего абитуриентов</span>
+<span id="totalApplicants" class="text-[#00E5FF] font-bold">0</span>
+</div>
+<div class="flex justify-between items-end border-b border-white/5 pb-2">
+<span class="text-on-surface-variant text-sm">Средний балл по узлу</span>
+<span id="avgScore" class="text-[#00E5FF] font-bold">0.0</span>
+</div>
+<div class="flex justify-between items-end border-b border-white/5 pb-2">
+<span class="text-on-surface-variant text-sm">Мест в квоте</span>
+<span class="text-[#00E5FF] font-bold">150</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-40 px-margin-desktop max-w-container-max mx-auto border-t border-white/5">
+<div class="text-center mb-24">
+<h2 class="font-headline-lg text-headline-lg text-white mb-8 text-glow-white hover-glitch inline-block cursor-default">Стажировки</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Практическая работа в ведущих лабораториях и технологических центрах мирового уровня. Лучшие студенты получают приглашение в штаб-квартиры партнеров.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="glass-card flex items-center justify-center p-10 h-40 group hover:neon-glow-cyan transition-all duration-300">
+<div class="font-display-hero text-2xl text-on-surface-variant opacity-40 group-hover:opacity-100 group-hover:text-[#00F0FF] group-hover:text-glow-cyan transition-all logo-chrome tracking-widest cursor-default">NEURAL_X</div>
+</div>
+<div class="glass-card flex items-center justify-center p-10 h-40 group hover:neon-glow-cyan transition-all duration-300">
+<div class="font-display-hero text-2xl text-on-surface-variant opacity-40 group-hover:opacity-100 group-hover:text-[#00F0FF] group-hover:text-glow-cyan transition-all logo-chrome tracking-widest cursor-default">AETHER.AI</div>
+</div>
+<div class="glass-card flex items-center justify-center p-10 h-40 group hover:neon-glow-cyan transition-all duration-300">
+<div class="font-display-hero text-2xl text-on-surface-variant opacity-40 group-hover:opacity-100 group-hover:text-[#00F0FF] group-hover:text-glow-cyan transition-all logo-chrome tracking-widest cursor-default">CYBERNET</div>
+</div>
+<div class="glass-card flex items-center justify-center p-10 h-40 group hover:neon-glow-cyan transition-all duration-300">
+<div class="font-display-hero text-2xl text-on-surface-variant opacity-40 group-hover:opacity-100 group-hover:text-[#00F0FF] group-hover:text-glow-cyan transition-all logo-chrome tracking-widest cursor-default">GIGACORE</div>
+</div>
+<div class="glass-card flex items-center justify-center p-10 h-40 group hover:neon-glow-cyan transition-all duration-300">
+<div class="font-display-hero text-2xl text-on-surface-variant opacity-40 group-hover:opacity-100 group-hover:text-[#00F0FF] group-hover:text-glow-cyan transition-all logo-chrome tracking-widest cursor-default">HYPERION</div>
+</div>
+<div class="glass-card flex items-center justify-center p-10 h-40 group hover:neon-glow-cyan transition-all duration-300">
+<div class="font-display-hero text-2xl text-on-surface-variant opacity-40 group-hover:opacity-100 group-hover:text-[#00F0FF] group-hover:text-glow-cyan transition-all logo-chrome tracking-widest cursor-default">VOID_LABS</div>
+</div>
+<div class="glass-card flex items-center justify-center p-10 h-40 group hover:neon-glow-cyan transition-all duration-300">
+<div class="font-display-hero text-2xl text-on-surface-variant opacity-40 group-hover:opacity-100 group-hover:text-[#00F0FF] group-hover:text-glow-cyan transition-all logo-chrome tracking-widest cursor-default">OMNI.SYS</div>
+</div>
+<div class="glass-card flex items-center justify-center p-10 h-40 group hover:neon-glow-cyan transition-all duration-300">
+<div class="font-display-hero text-2xl text-on-surface-variant opacity-40 group-hover:opacity-100 group-hover:text-[#00F0FF] group-hover:text-glow-cyan transition-all logo-chrome tracking-widest cursor-default">SPECTRA</div>
+</div>
+</div>
+</section>
+<section class="py-40 px-margin-desktop max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-white mb-20 text-center text-glow-white hover-glitch inline-block w-full cursor-default">Руководство вуза</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="glass-card p-6 flex flex-col items-center chrome-border hover:neon-glow-cyan transition-all duration-500 group">
+<div class="aspect-[3/4] w-full mb-6 overflow-hidden border border-white/10">
+<img alt="Александр Новиков" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida/ADBb0uiocxKLEn7Un8yl5BCDm9iaSAZG_qQNkKFtCiF-vzW9gjwA0Nc-0-2EqCBzHbrXc78v5-9nu2AGJyj2i4eT3h-f0ZadWgtDvDbv4DdVp7TRcwFTP4bJB95T9hVTcrPHcaVdg6ohJ9ClK6DfSMKdSQZ-sIDvgwMnqE9aAnoAwYE5QOaAJ8_kltl9LoxZ9fIIcvVT2lMXFB6na0CkNBtV2uRNaL4uqeLlHnS3rh6kI_Q5sTv7xt5Tf3dr8a0"/>
+</div>
+<div class="text-center space-y-2">
+<h3 class="font-headline-md text-xl text-white group-hover:text-[#00F0FF] transition-colors">Александр Новиков</h3>
+<p class="font-label-caps text-xs text-on-surface-variant tracking-widest uppercase">РЕКТОР</p>
+</div>
+</div>
+<div class="glass-card p-6 flex flex-col items-center chrome-border hover:neon-glow-cyan transition-all duration-500 group">
+<div class="aspect-[3/4] w-full mb-6 overflow-hidden border border-white/10">
+<img alt="Дмитрий Иванов" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida/ADBb0ugvII4-fZaRV8s0q4IyWnTzghpGhwWeCpczSagb2xaikBq3A1qvH3MWFwdlerpHiV_9nEGUsBPC2D8Y7-XZWnTy4Hg7WwX426pLyUD3Ih__L250E2W3y2fqfkHWQagS_BEFll3M7Cp4SwuyUsBuAbth6fEixxieYevuAju9NlDhuCBviYiJ_C_ONQvSiRQfyN85Gn8DHoGkBLQKdcpWtfXFjrdKRTaJuoKhQSj3tmoZVhyxJpeHR8INrAM"/>
+</div>
+<div class="text-center space-y-2">
+<h3 class="font-headline-md text-xl text-white group-hover:text-[#00F0FF] transition-colors">Дмитрий Иванов</h3>
+<p class="font-label-caps text-xs text-on-surface-variant tracking-widest uppercase">ПРОРЕКТОР</p>
+</div>
+</div>
+<div class="glass-card p-6 flex flex-col items-center chrome-border hover:neon-glow-cyan transition-all duration-500 group">
+<div class="aspect-[3/4] w-full mb-6 overflow-hidden border border-white/10">
+<img alt="Елена Соколова" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrlGq2aT6qSjSRsqxbmm9JECmIXiJfb5HCCpE2qRWeHmZfz-WIDB0kqMGbKrdsAOWONhwbRQqVzElUZcu99cibD3DjK9bXNN0bIESPvsWBsh71mVHwG_5kVOOVV-EUhhOdhw0GI1Otw1iHQYkwxpCfLPV3FvFXedEMFszrTIjQkz2cyHZxKcN9DYOGQYEuo1aeLPZFoChGkMVTuVmSedo3x2QD2MyHL389T1ZLVUAyZL3i48KAKVoc8Sms4lsExIZAlNdFNr3q15Q"/>
+</div>
+<div class="text-center space-y-2">
+<h3 class="font-headline-md text-xl text-white group-hover:text-[#00F0FF] transition-colors">Елена Соколова</h3>
+<p class="font-label-caps text-xs text-on-surface-variant tracking-widest uppercase">ПРОРЕКТОР</p>
+</div>
+</div>
+<div class="glass-card p-6 flex flex-col items-center chrome-border hover:neon-glow-cyan transition-all duration-500 group">
+<div class="aspect-[3/4] w-full mb-6 overflow-hidden border border-white/10">
+<img alt="Мария Белова" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfREKAoSnovLXTEx9Fo1pMaYgZQNAUqbdnXxjJHwTovHRNq0pMPkzLYcK4cUnsij860t5BtaXwdJVeYeFIjMCJXFg3fvEsnO5RrfKbHMeF2NjIZ8DXx5XZXu2iAmzCd9N1oG5RPqUxu7jN1OVpHstPypfoF9fUByFhMV0N8utCZqrGNyGgyNIqrLmvi5-mJgZWAdRuKM8BAfYXuJ6m9E5bDbzp9oTo6JP9mwW2FJ_CT0OOSY-fBVxLRJofHdjuUiSdcV-Itn6z_cM"/>
+</div>
+<div class="text-center space-y-2">
+<h3 class="font-headline-md text-xl text-white group-hover:text-[#00F0FF] transition-colors">Мария Белова</h3>
+<p class="font-label-caps text-xs text-on-surface-variant tracking-widest uppercase">ПРОРЕКТОР</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-80 px-margin-desktop text-center relative overflow-hidden bg-[#020202] border-t border-white/10">
+<div class="absolute inset-0 bg-[#00F0FF]/5 blur-[120px] rounded-full scale-150 translate-y-1/2">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,240,255,0.15)_0%,_transparent_70%)] opacity-50"></div>
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#00F0FF 0.5px, transparent 0.5px); background-size: 30px 30px;"></div>
+</div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-[#00F0FF] to-transparent shadow-[0_0_15px_#00F0FF] animate-pulse"></div>
+<div class="relative z-10 max-w-4xl mx-auto space-y-12">
+<h2 class="font-display-hero text-headline-lg md:text-display-hero text-white font-extrabold tracking-tight drop-shadow-[0_0_15px_rgba(0,240,255,0.4)] mb-8 uppercase hover-glitch cursor-default transition-all">Граница ждет вашей подписи.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Присоединяйтесь к самому передовому вычислительному сообществу в известных секторах. Займите свое место в исследованиях уже сегодня.</p>
+<div class="pt-8">
+<button class="chrome-button text-[#0e0e0e] px-16 py-6 font-label-caps text-label-caps tracking-[0.3em] font-bold transition-all duration-500 rounded-full scale-110 hover:scale-125 shadow-[0_0_30px_rgba(0,240,255,0.3)] hover:shadow-[0_0_60px_rgba(0,240,255,0.6)]" onclick="window.location.href='admission.html'">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-[#00F0FF] to-transparent shadow-[0_0_15px_#00F0FF]"></div>
+<span class="relative z-10">ПОДКЛЮЧИТЬСЯ К СЕТИ</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-surface w-full py-20 border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-gutter max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md text-white font-bold tracking-tighter text-glow-white drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] whitespace-nowrap hover-glitch cursor-default transition-all">AXIOMA-M</div>
+<div class="flex flex-wrap justify-center gap-8 my-8 md:my-0">
+<a class="font-body-sm text-body-sm text-white hover:text-[#00F0FF] hover:text-glow-cyan transition-all duration-300" href="#">Протокол конфиденциальности</a>
+<a class="font-body-sm text-body-sm text-white hover:text-[#00F0FF] hover:text-glow-cyan transition-all duration-300" href="#">Условия исследований</a>
+<a class="font-body-sm text-body-sm text-white hover:text-[#00F0FF] hover:text-glow-cyan transition-all duration-300" href="#">Нейроэтика</a>
+<a class="font-body-sm text-body-sm text-white hover:text-[#00F0FF] hover:text-glow-cyan transition-all duration-300" href="#">Поддержка</a>
+</div>
+<div class="font-body-sm text-body-sm text-white/90 text-center md:text-right">STARDATE 2026 УНИВЕРСИТЕТ ИИ AXIOMA-M. <span class="text-[#00F0FF] text-glow-cyan font-medium">НЕЙРОННЫЕ ГРАНИЦЫ ЗАЩИЩЕНЫ.</span></div>
+</div>
+</footer>
+</body></html>
